@@ -16,67 +16,55 @@ public class PlayerMove : MonoBehaviour
         Move1Unit();
     }
     public void Move1Unit(){
-
         
-
         if(Input.GetKeyDown(KeyCode.UpArrow)){
 
-            originPosition = gameObject.transform.position;
+            Debug.Log(targetPosition);
+            ResetPos();
 
             targetPosition = new Vector2(playerPosX, playerPosY + 1);
-            //ResetToInt();
+            PositionSetInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            //gameObject.transform.position = targetPosition;
+            gameObject.transform.position = targetPosition;
 
-            gameObject.transform.Translate(targetPosition);
-
-            playerPosX = gameObject.transform.position.x;
-            playerPosY = gameObject.transform.position.y;
+            //gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){
 
-            originPosition = gameObject.transform.position;
+            Debug.Log(targetPosition);
+            ResetPos();
 
             targetPosition = new Vector2(playerPosX, playerPosY - 1);
-            //ResetToInt();
+            PositionSetInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            //gameObject.transform.position = targetPosition;
+            gameObject.transform.position = targetPosition;
             
-            gameObject.transform.Translate(targetPosition);
-
-            playerPosX = gameObject.transform.position.x;
-            playerPosY = gameObject.transform.position.y;
+            //gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
-            
-            originPosition = gameObject.transform.position;
+            Debug.Log(targetPosition);
+            ResetPos();
 
             targetPosition = new Vector2(playerPosX - 1, playerPosY);
-            //ResetToInt();
+            PositionSetInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            //gameObject.transform.position = targetPosition;
+            gameObject.transform.position = targetPosition;
 
-            gameObject.transform.Translate(targetPosition);
-
-            playerPosX = gameObject.transform.position.x;
-            playerPosY = gameObject.transform.position.y;
+            //gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
-
-            originPosition = gameObject.transform.position;
+Debug.Log(targetPosition);
+            ResetPos();
 
             targetPosition = new Vector2(playerPosX + 1, playerPosY);
-            //ResetToInt();
+            PositionSetInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            //gameObject.transform.position = targetPosition;
+            gameObject.transform.position = targetPosition;
 
-            gameObject.transform.Translate(targetPosition);
-
-            playerPosX = gameObject.transform.position.x;
-            playerPosY = gameObject.transform.position.y;
+            //gameObject.transform.Translate(targetPosition);
         }
     }
 
@@ -85,9 +73,16 @@ public class PlayerMove : MonoBehaviour
         gameObject.transform.position = originPosition;
     }
 
-    // private void ResetToInt(){
+    private void ResetPos(){
 
-    //     targetPosition.x = (int)targetPosition.x; 
-    //     targetPosition.y = (int)targetPosition.y;
-    // }
+        originPosition = gameObject.transform.position;
+        playerPosX = originPosition.x;
+        playerPosY = originPosition.y;
+    }
+
+    public void PositionSetInt(){
+
+        targetPosition.x = (int)targetPosition.x;
+        targetPosition.y = (int)targetPosition.y;
+    }
 }
