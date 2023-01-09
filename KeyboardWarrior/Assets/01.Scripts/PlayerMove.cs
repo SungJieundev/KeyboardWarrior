@@ -24,7 +24,9 @@ public class PlayerMove : MonoBehaviour
             targetPosition = new Vector2(playerPosX, playerPosY + 1);
             //ResetToInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            gameObject.transform.position = targetPosition;
+            //gameObject.transform.position = targetPosition;
+
+            gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){
@@ -32,7 +34,9 @@ public class PlayerMove : MonoBehaviour
             targetPosition = new Vector2(playerPosX, playerPosY - 1);
             //ResetToInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            gameObject.transform.position = targetPosition;
+            //gameObject.transform.position = targetPosition;
+            
+            gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
@@ -40,7 +44,9 @@ public class PlayerMove : MonoBehaviour
             targetPosition = new Vector2(playerPosX - 1, playerPosY);
             //ResetToInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            gameObject.transform.position = targetPosition;
+            //gameObject.transform.position = targetPosition;
+
+            gameObject.transform.Translate(targetPosition);
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
@@ -48,7 +54,9 @@ public class PlayerMove : MonoBehaviour
             targetPosition = new Vector2(playerPosX + 1, playerPosY);
             //ResetToInt();
             //gameObject.transform.position = Vector2.Lerp(gameObject.transform.position, targetPosition, 0.5f);
-            gameObject.transform.position = targetPosition;
+            //gameObject.transform.position = targetPosition;
+
+            gameObject.transform.Translate(targetPosition);
         }
     }
 
