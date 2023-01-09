@@ -16,8 +16,8 @@ public class ShowKeyWord : MonoBehaviour
 
     [SerializeField] private int longp; //ex - 20
     private string keyWord;
-
     private float duration;
+    private int longIndex, shortIndex;
 
     private void Awake() {
 
@@ -29,9 +29,9 @@ public class ShowKeyWord : MonoBehaviour
 
     public void keyWordShow() {
 
-        int w = Random.Range(1, 101);
+        int ran = Random.Range(1, 101);
 
-        if (w <= longp) { //영구 키워드에 걸렸다면 값 <= 20
+        if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 20
 
             int n = Random.Range(0, longKeyWordList.Count + 1);
             keyWord = longKeyWordList[n];
@@ -42,6 +42,6 @@ public class ShowKeyWord : MonoBehaviour
             keyWord = shortKeyWordList[m];
         }
 
-        DoTween.instance.DoString(keyWord, keyWordTxt, duration);
+        // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
     }
 }
