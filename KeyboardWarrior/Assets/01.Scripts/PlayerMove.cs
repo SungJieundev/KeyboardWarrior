@@ -7,7 +7,8 @@ public class PlayerMove : MonoBehaviour
 
     private float playerPosX;
     private float playerPosY;
-    private Vector3 targetPosition;
+    private Vector2 targetPosition;
+    private Vector2 originPosition;
 
 
     private void Update() {
@@ -16,10 +17,11 @@ public class PlayerMove : MonoBehaviour
     }
     public void Move1Unit(){
 
-        playerPosX = gameObject.transform.position.x;
-        playerPosY = gameObject.transform.position.y;
+        
 
         if(Input.GetKeyDown(KeyCode.UpArrow)){
+
+            originPosition = gameObject.transform.position;
 
             targetPosition = new Vector2(playerPosX, playerPosY + 1);
             //ResetToInt();
@@ -27,9 +29,14 @@ public class PlayerMove : MonoBehaviour
             //gameObject.transform.position = targetPosition;
 
             gameObject.transform.Translate(targetPosition);
+
+            playerPosX = gameObject.transform.position.x;
+            playerPosY = gameObject.transform.position.y;
         }
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){
+
+            originPosition = gameObject.transform.position;
 
             targetPosition = new Vector2(playerPosX, playerPosY - 1);
             //ResetToInt();
@@ -37,9 +44,14 @@ public class PlayerMove : MonoBehaviour
             //gameObject.transform.position = targetPosition;
             
             gameObject.transform.Translate(targetPosition);
+
+            playerPosX = gameObject.transform.position.x;
+            playerPosY = gameObject.transform.position.y;
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
+            
+            originPosition = gameObject.transform.position;
 
             targetPosition = new Vector2(playerPosX - 1, playerPosY);
             //ResetToInt();
@@ -47,9 +59,14 @@ public class PlayerMove : MonoBehaviour
             //gameObject.transform.position = targetPosition;
 
             gameObject.transform.Translate(targetPosition);
+
+            playerPosX = gameObject.transform.position.x;
+            playerPosY = gameObject.transform.position.y;
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
+
+            originPosition = gameObject.transform.position;
 
             targetPosition = new Vector2(playerPosX + 1, playerPosY);
             //ResetToInt();
@@ -57,7 +74,15 @@ public class PlayerMove : MonoBehaviour
             //gameObject.transform.position = targetPosition;
 
             gameObject.transform.Translate(targetPosition);
+
+            playerPosX = gameObject.transform.position.x;
+            playerPosY = gameObject.transform.position.y;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+        gameObject.transform.position = originPosition;
     }
 
     // private void ResetToInt(){
