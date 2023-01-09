@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Globalization;
 using Microsoft.Win32.SafeHandles;
 using System.Collections;
@@ -13,8 +14,10 @@ public class ShowKeyWord : MonoBehaviour
     [SerializeField] private List<string> longKeyWordList = new List<string>(); //비영구
     [SerializeField] private List<string> shortKeyWordList = new List<string>(); //영군
 
-    [SerializeField] private int longp, shortp; //비영구, 영구 나올 확률 변수
+    [SerializeField] private int longp; //ex - 20
     private string keyWord;
+
+    private float duration;
 
     private void Awake() {
 
@@ -25,10 +28,20 @@ public class ShowKeyWord : MonoBehaviour
     }
 
     public void keyWordShow() {
-        //int n = Random.Range
-        //제시어 선정하는 스크립트
-        //제시어 담은 변수를 매개변수로 받는 다트윈(타닥타닥) 호출
 
-        DoTween.instance.DoString(keyWord);
+        int w = Random.Range(1, 101);
+
+        if (w <= longp) { //영구 키워드에 걸렸다면 값 <= 20
+
+            int n = Random.Range(0, longKeyWordList.Count + 1);
+            keyWord = longKeyWordList[n];
+        }
+        else { //비영구 키워드에 걸렸다면
+
+            int m = Random.Range(0, shortKeyWordList.Count + 1);
+            keyWord = shortKeyWordList[m];
+        }
+
+        DoTween.instance.DoString(keyWord, keyWordTxt, duration);
     }
 }
