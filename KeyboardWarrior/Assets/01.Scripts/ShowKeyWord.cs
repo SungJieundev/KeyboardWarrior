@@ -21,27 +21,32 @@ public class ShowKeyWord : MonoBehaviour
 
     private void Awake() {
 
-        keyWordTxt.text = "";
+        keyWordTxt.text = "null";
+        keyWordShow();
     }
     private void Update() {
-        
+        if (Input.GetKeyDown(KeyCode.J)) keyWordShow();
     }
 
-    public void keyWordShow() {
+    public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰
 
         int ran = Random.Range(1, 101);
 
+        Debug.Log(ran);
+
         if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 20
 
-            int n = Random.Range(0, longKeyWordList.Count + 1);
-            keyWord = longKeyWordList[n];
+            longIndex = Random.Range(0, longKeyWordList.Count + 1);
+            keyWord = longKeyWordList[longIndex];
         }
         else { //비영구 키워드에 걸렸다면
 
-            int m = Random.Range(0, shortKeyWordList.Count + 1);
-            keyWord = shortKeyWordList[m];
+            shortIndex = Random.Range(0, shortKeyWordList.Count + 1);
+            keyWord = shortKeyWordList[shortIndex];
         }
 
+        keyWordTxt.text = keyWord; //테스트
         // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
+        //다트윈으로 나타낼 무튼 다트윈 메서드인데 매개변수로 keyWord 넘겨주면 댐 ㅎㅎ;
     }
 }

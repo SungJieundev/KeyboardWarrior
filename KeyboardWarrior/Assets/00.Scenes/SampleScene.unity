@@ -248,6 +248,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e758d18bf1170d4c80d0a98933fe3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &17935840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 17935842}
+  - component: {fileID: 17935841}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &17935841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ed8a10127142d4891de4523ecaa927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyWordTxt: {fileID: 191859494}
+  longKeyWordList:
+  - 1920 x 1080
+  - int
+  - double
+  shortKeyWordList:
+  - public static float speed
+  - rigidbody rb2d
+  - mathf.pow(5, 3)
+  - using system.io
+  - using scenemanagement
+  longp: 20
+--- !u!4 &17935842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &22124947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,7 +1791,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: public static float speed
+  m_text: null
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8723097accf5a2c479fc807f72f11ca7, type: 2}
   m_sharedMaterial: {fileID: -2238663084864148367, guid: 8723097accf5a2c479fc807f72f11ca7, type: 2}
