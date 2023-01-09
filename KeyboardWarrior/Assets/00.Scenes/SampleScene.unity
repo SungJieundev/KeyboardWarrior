@@ -258,6 +258,8 @@ GameObject:
   m_Component:
   - component: {fileID: 17935842}
   - component: {fileID: 17935841}
+  - component: {fileID: 17935843}
+  - component: {fileID: 17935844}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -284,9 +286,9 @@ MonoBehaviour:
   - double
   shortKeyWordList:
   - public static float speed
-  - rigidbody rb2d
-  - mathf.pow(5, 3)
-  - using system.io
+  - rigidbody rigid
+  - boxcollider bcol
+  - using system io
   - using scenemanagement
   longp: 20
 --- !u!4 &17935842
@@ -304,6 +306,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17935843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67ecb686d19fc14b881b87b6e623c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyWordTxt: {fileID: 191859494}
+--- !u!114 &17935844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf8333f8f5a4654396c08e9bb1f1bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &22124947
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,16 +11,21 @@ public class CompareChar : MonoBehaviour
     private string keyWord;
 
     private void Awake() {
-        keyWord = keyWordTxt.text;
-        Compare();
+
+        if (!instance) instance = this;
+        else { Destroy(gameObject); }
     }
 
 
     public void Compare() {
+
+        keyWord = keyWordTxt.text;
+
         for (int i = 0; i < keyWord.Length; i++) {
 
-            GameObject.Find($"{keyWord[i]}").SetActive(false); //찾아서 펄스
-            Debug.Log(keyWord);
+            GameObject dd = GameObject.Find($"{keyWord[i]}");
+            dd.SetActive(false); //찾아서 펄스
+            Debug.Log(dd);
         }
     }
 }

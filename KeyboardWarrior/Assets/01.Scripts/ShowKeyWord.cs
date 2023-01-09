@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ShowKeyWord : MonoBehaviour
 {
@@ -16,13 +17,12 @@ public class ShowKeyWord : MonoBehaviour
 
     [SerializeField] private int longp; //ex - 20
     private string keyWord;
-    private float duration;
+    private float duration = 1.5f;
     private int longIndex, shortIndex;
 
     private void Awake() {
 
         keyWordTxt.text = "null";
-        keyWordShow();
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.J)) keyWordShow();
@@ -45,7 +45,16 @@ public class ShowKeyWord : MonoBehaviour
             keyWord = shortKeyWordList[shortIndex];
         }
 
-        keyWordTxt.text = keyWord; //테스트
+        Sequence sequence = DOTween.Sequence();
+
+        //DoTweens.instance.DoString(keyWord, keyWordTxt, duration);
+        sequence.Append(keyWordTxt.DOText(keyWord, duration));
+
+        sequence.OnComplete(() => {
+
+            CompareChar.instance.Compare();
+        });
+
         // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
         //다트윈으로 나타낼 무튼 다트윈 메서드인데 매개변수로 keyWord 넘겨주면 댐 ㅎㅎ;
     }
