@@ -15,6 +15,7 @@
 //         else { Destroy(gameObject); }
 //     }
 
+
 //     // private string myString;
 //     public void DoString(string msg, TextMeshProUGUI txt, float time) { //글자 타닥타닥 해주는 거
 //         // txt.GetComponent<text>().d);
