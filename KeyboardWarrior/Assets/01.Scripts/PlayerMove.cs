@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.UpArrow)){
 
-            Debug.Log(targetPosition);
+            
             ResetPos();
 
             targetPosition = new Vector2(playerPosX, playerPosY + 1);
@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.DownArrow)){
 
-            Debug.Log(targetPosition);
+            
             ResetPos();
 
             targetPosition = new Vector2(playerPosX, playerPosY - 1);
@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.LeftArrow)){
-            Debug.Log(targetPosition);
+            
             ResetPos();
 
             targetPosition = new Vector2(playerPosX - 1, playerPosY);
@@ -56,7 +56,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow)){
-Debug.Log(targetPosition);
+
             ResetPos();
 
             targetPosition = new Vector2(playerPosX + 1, playerPosY);
