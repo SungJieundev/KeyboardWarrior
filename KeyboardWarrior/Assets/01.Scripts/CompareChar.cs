@@ -10,6 +10,8 @@ public class CompareChar : MonoBehaviour
 
     private string keyWord;
 
+    [SerializeField] private float duration;
+
     private void Awake() {
 
         if (!instance) instance = this;
@@ -24,6 +26,7 @@ public class CompareChar : MonoBehaviour
         for (int i = 0; i < keyWord.Length; i++) {
 
             GameObject dd = GameObject.Find($"{keyWord[i]}");
+            DoTweens.instance.DoTColor(dd, Color.red, duration); //이거 자체에서 시간 보내줌ㅎㅎ
             dd.SetActive(false); //찾아서 펄스
         }
     }
