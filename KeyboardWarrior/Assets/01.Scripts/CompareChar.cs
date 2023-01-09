@@ -25,7 +25,6 @@ public class CompareChar : MonoBehaviour
 
             GameObject dd = GameObject.Find($"{keyWord[i]}");
             dd.SetActive(false); //찾아서 펄스
-            Debug.Log(dd);
         }
     }
 }

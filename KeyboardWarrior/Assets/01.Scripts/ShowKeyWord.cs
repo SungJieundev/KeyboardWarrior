@@ -48,12 +48,12 @@ public class ShowKeyWord : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
 
         //DoTweens.instance.DoString(keyWord, keyWordTxt, duration);
-        sequence.Append(keyWordTxt.DOText(keyWord, duration));
+        // sequence.Append(keyWordTxt.DOText(keyWord, duration));
 
-        sequence.OnComplete(() => {
+        // sequence.OnComplete(() => {
 
-            CompareChar.instance.Compare();
-        });
+        //     CompareChar.instance.Compare();
+        // });
 
         // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
         //다트윈으로 나타낼 무튼 다트윈 메서드인데 매개변수로 keyWord 넘겨주면 댐 ㅎㅎ;
