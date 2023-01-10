@@ -44,7 +44,7 @@ public class ShowKeyWord : MonoBehaviour
         }
         else { //비영구 키워드에 걸렸다면
 
-            shortIndex = Random.Range(0, shortKeyWordList.Count + 1);
+            shortIndex = Random.Range(0, shortKeyWordList.Count);
             keyWord = shortKeyWordList[shortIndex];
             keyWordType = "short";
         }
