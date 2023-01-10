@@ -281,17 +281,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyWordTxt: {fileID: 191859494}
-  longKeyWordList:
-  - 1234
-  - 5678
-  - 90
-  shortKeyWordList:
+  trueKeyWordList:
+  - 12345
+  - 67890
   - qwert
   - yuiop
   - asdfg
-  - hjklz
-  - xcvbnm
-  longp: 2
+  falseKeyWordList:
+  - hjkl
+  - zxcv
+  - bnm
+  truep: 70
+  falsep: 30
 --- !u!4 &17935842
 Transform:
   m_ObjectHideFlags: 0
@@ -320,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyWordTxt: {fileID: 191859494}
+  keyWord: 
   keyBoard:
   - {fileID: 826802726}
   - {fileID: 1801943266}
