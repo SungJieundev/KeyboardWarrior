@@ -15,6 +15,8 @@ public class ShowKeyWord : MonoBehaviour
     [SerializeField] private List<string> longKeyWordList = new List<string>(); //비영구
     [SerializeField] private List<string> shortKeyWordList = new List<string>(); //영군
 
+    private string keyWordType;
+
     [SerializeField] private int longp; //ex - 20
     private string keyWord;
     private float duration = 1.5f;
@@ -30,19 +32,21 @@ public class ShowKeyWord : MonoBehaviour
 
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰
 
-        int ran = Random.Range(1, 101);
+        int ran = Random.Range(1, 9);
 
         Debug.Log(ran);
 
-        if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 20
+        if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 1, 2만 걸림
 
-            longIndex = Random.Range(0, longKeyWordList.Count + 1);
-            keyWord = longKeyWordList[longIndex];
+            longIndex = Random.Range(0, longKeyWordList.Count);
+            keyWord = longKeyWordList[longIndex]; //인덱스 초과
+            keyWordType = "long";
         }
         else { //비영구 키워드에 걸렸다면
 
             shortIndex = Random.Range(0, shortKeyWordList.Count + 1);
             keyWord = shortKeyWordList[shortIndex];
+            keyWordType = "short";
         }
 
         Sequence sequence = DOTween.Sequence();
