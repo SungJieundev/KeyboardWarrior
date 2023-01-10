@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class KeyboardPushed : MonoBehaviour
 {
+    public SpriteRenderer sr;
+
+    private void Awake() {
+        sr = GetComponent<SpriteRenderer>();
+    }
     private void OnTriggerEnter2D(Collider2D other) { //tirgger 충돌한다면
 
         if (other.CompareTag("Player")) { //충돌한 상대 오브젝트의 태그가 player라면
