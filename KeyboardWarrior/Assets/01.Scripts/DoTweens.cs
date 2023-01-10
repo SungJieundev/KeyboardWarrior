@@ -25,4 +25,14 @@ public class DoTweens : MonoBehaviour
 
         obj.GetComponent<Material>().DOColor(color, time);
     }
+
+    public void LoopColor(GameObject obj, Color currentColor, Color endColor, float time){
+
+        Material objMaterial = obj.GetComponent<Material>();
+
+        Sequence sequence = DOTween.Sequence();
+        
+        sequence.Append(objMaterial.DOColor(endColor, time));
+        sequence.Append(objMaterial.DOColor(currentColor, time));
+    }
 }
