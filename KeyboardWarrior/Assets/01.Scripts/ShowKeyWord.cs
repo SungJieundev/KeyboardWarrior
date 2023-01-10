@@ -12,12 +12,12 @@ public class ShowKeyWord : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI keyWordTxt;
 
-    [SerializeField] private List<string> longKeyWordList = new List<string>(); //비영구
-    [SerializeField] private List<string> shortKeyWordList = new List<string>(); //영군
+    [SerializeField] private List<string> trueKeyWordList = new List<string>(); //옳은 - 비영구
+    [SerializeField] private List<string> falseKeyWordList = new List<string>(); //옳지 않은 - 영구
 
-    private string keyWordType;
+    private string keyWordType; //키워드 타입
 
-    [SerializeField] private int longp; //ex - 20
+    [SerializeField] private int longp; // 확률?
     private string keyWord;
     private float duration = 1.5f;
     private int longIndex, shortIndex;
@@ -38,14 +38,14 @@ public class ShowKeyWord : MonoBehaviour
 
         if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 1, 2만 걸림
 
-            longIndex = Random.Range(0, longKeyWordList.Count);
-            keyWord = longKeyWordList[longIndex]; //인덱스 초과
+            longIndex = Random.Range(0, trueKeyWordList.Count);
+            keyWord = trueKeyWordList[longIndex]; //인덱스 초과
             keyWordType = "long";
         }
         else { //비영구 키워드에 걸렸다면
 
-            shortIndex = Random.Range(0, shortKeyWordList.Count);
-            keyWord = shortKeyWordList[shortIndex];
+            shortIndex = Random.Range(0, falseKeyWordList.Count);
+            keyWord = falseKeyWordList[shortIndex];
             keyWordType = "short";
         }
 

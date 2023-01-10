@@ -16,7 +16,7 @@ public class CompareChar : MonoBehaviour
 
     private string keyWord; //키워드 받아오는 변수
 
-    [SerializeField] private List<GameObject> keyBoard = new List<GameObject>(); //이동 가능한 키보드를 담아둔 리스트
+    public List<GameObject> keyBoard = new List<GameObject>(); //이동 가능한 키보드를 담아둔 리스트
 
 
     private List<GameObject> previousKeyBoard = new List<GameObject>(); //이전의 키보드를 담아둔다.
