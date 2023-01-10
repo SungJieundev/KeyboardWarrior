@@ -91,7 +91,12 @@ public class CompareChar : MonoBehaviour
     }
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상
+    
+        foreach (GameObject dd in keyBoard) {
 
+            dd.GetComponent<SpriteRenderer>().enabled = true;
+            dd.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
+        }
     }
 
     private void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
