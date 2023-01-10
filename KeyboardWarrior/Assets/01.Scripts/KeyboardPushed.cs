@@ -19,6 +19,7 @@ public class KeyboardPushed : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D other) { //tirgger 충돌이 끝난다면
+    
         transform.Find("c").gameObject.SetActive(true); //자식을 꺼준다 = 눌린 이미지보임
     }
 

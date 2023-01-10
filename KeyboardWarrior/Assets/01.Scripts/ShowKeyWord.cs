@@ -16,12 +16,12 @@ public class ShowKeyWord : MonoBehaviour
     [SerializeField] private List<string> trueKeyWordList = new List<string>(); //옳은 - 비영구
     [SerializeField] private List<string> falseKeyWordList = new List<string>(); //옳지 않은 - 영구
 
-    [SerializeField] private int turep; // 키워드가 옳을 활률
+    [SerializeField] private int truep; // 키워드가 옳을 활률
     [SerializeField] private int falsep; //키워드가 옳지 않을 확률
     private int longIndex; //
     private int shortIndex;
 
-    private int ttttt;
+    private float ttttt;
 
     private string keyWordType; //키워드 타입 (옳, 옳 않)
 
@@ -37,26 +37,31 @@ public class ShowKeyWord : MonoBehaviour
 
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰 / 시작
 
-        ttttt = 100 / (trueKeyWordList.Count + falseKeyWordList.Count);
-        Debug.Log(ttttt);
-        int ran = Random.Range(1, (trueKeyWordList.Count + falseKeyWordList.Count) * ttttt + 1);
-        Debug.Log(ttttt);
+        // ttttt = 100 / (trueKeyWordList.Count + falseKeyWordList.Count);
+        ttttt = 100 / (3 + 5);
+        Debug.Log(ttttt + " 몇 배 해줘야 하는지");
+        // int ran = Random.Range(1, (int)((trueKeyWordList.Count + falseKeyWordList.Count) * ttttt) + 1);
+        int ran = Random.Range(1, (int)((3 + 5) * ttttt) + 1);
+        // Debug.Log((trueKeyWordList.Count + falseKeyWordList.Count) * ttttt + " 응애다 이발");
+        Debug.Log((3 + 5) * ttttt + " 응애다 이발");
 
 
         Debug.Log(ran); //확률이 몇이 나왔는지
 
-        if (ran <= turep) { //옳은 코딩이 나올 확률
+        
+        if (ran <= falsep) { //옳지 않은 코딩이 나왔다면
 
             longIndex = Random.Range(0, trueKeyWordList.Count);
-            keyWord = trueKeyWordList[longIndex]; //인덱스 초과
-            keyWordType = "long";
+            keyWord = trueKeyWordList[longIndex];
+            keyWordType = "falseT";
         }
-        else { //비영구 키워드에 걸렸다면
+        else if (ran > falsep && ran <= truep) { //옳은 코딩이 나왔다면
 
             shortIndex = Random.Range(0, falseKeyWordList.Count);
             keyWord = falseKeyWordList[shortIndex];
-            keyWordType = "short";
+            keyWordType = "trueT";
         }
+        else { Debug.LogError("옳은 코딩 옳지 않은 코딩 확률이 뜨지 않음 = 오류");}
 
         Sequence sequence = DOTween.Sequence();
 
