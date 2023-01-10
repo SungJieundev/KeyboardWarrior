@@ -18,7 +18,15 @@ public class FeverTime : MonoBehaviour
         compareChar = GetComponent<CompareChar>();
     }
 
-    private void FeverRoutine(){
+    private void Update() {
+        
+        if(Input.GetKeyDown(KeyCode.S)){
+            RandomFeverKeyBoardRoutine();
+            Debug.Log(feverKeyBoardChar);
+        }
+    }
+
+    private void RandomFeverKeyBoardRoutine(){
 
         RandomFeverKeyBoard(); // 피버키보드 뽑기
 
@@ -29,6 +37,8 @@ public class FeverTime : MonoBehaviour
         }
 
         // 뽑은 피버키보드를 밟으면 currentTriggerCount++
+        
+        
         // 만약 currentTriggerCount >= triggerCount 라면
         // 피버타임을 시작하기
 

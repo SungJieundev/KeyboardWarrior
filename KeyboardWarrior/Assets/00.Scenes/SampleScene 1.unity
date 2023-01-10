@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 17935841}
   - component: {fileID: 17935843}
   - component: {fileID: 17935844}
+  - component: {fileID: 17935845}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -281,17 +282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyWordTxt: {fileID: 191859494}
-  longKeyWordList:
-  - 1234
-  - 5678
-  - 90
-  shortKeyWordList:
-  - qwert
-  - yuiop
-  - asdfg
-  - hjklz
-  - xcvbnm
-  longp: 2
+  trueKeyWordList: []
+  falseKeyWordList: []
+  truep: 70
+  falsep: 30
 --- !u!4 &17935842
 Transform:
   m_ObjectHideFlags: 0
@@ -320,6 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyWordTxt: {fileID: 191859494}
+  keyWord: 
   keyBoard:
   - {fileID: 826802726}
   - {fileID: 1801943266}
@@ -369,6 +364,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adf8333f8f5a4654396c08e9bb1f1bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &17935845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2ec47f9b8ef5243b55b0148ea4b17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &22124947
