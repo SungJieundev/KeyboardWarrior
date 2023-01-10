@@ -10,33 +10,42 @@ using DG.Tweening;
 
 public class ShowKeyWord : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI keyWordTxt;
+    [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드
+    private string keyWord; //키워드를 저장할 변수
 
     [SerializeField] private List<string> trueKeyWordList = new List<string>(); //옳은 - 비영구
     [SerializeField] private List<string> falseKeyWordList = new List<string>(); //옳지 않은 - 영구
 
-    private string keyWordType; //키워드 타입
+    [SerializeField] private int turep; // 키워드가 옳을 활률
+    [SerializeField] private int falsep; //키워드가 옳지 않을 확률
+    private int longIndex; //
+    private int shortIndex;
 
-    [SerializeField] private int longp; // 확률?
-    private string keyWord;
-    private float duration = 1.5f;
-    private int longIndex, shortIndex;
+    private int ttttt;
+
+    private string keyWordType; //키워드 타입 (옳, 옳 않)
+
+    private float duration = 1.5f; //키워드 타이핑 지속시간
 
     private void Awake() {
 
         keyWordTxt.text = "null";
     }
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.J)) keyWordShow();
+        if (Input.GetKeyDown(KeyCode.J)) keyWordShow(); //테스트용
     }
 
-    public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰
+    public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰 / 시작
 
-        int ran = Random.Range(1, 9);
+        ttttt = 100 / (trueKeyWordList.Count + falseKeyWordList.Count);
+        Debug.Log(ttttt);
+        int ran = Random.Range(1, (trueKeyWordList.Count + falseKeyWordList.Count) * ttttt + 1);
+        Debug.Log(ttttt);
 
-        Debug.Log(ran);
 
-        if (ran <= longp) { //영구 키워드에 걸렸다면 값 <= 1, 2만 걸림
+        Debug.Log(ran); //확률이 몇이 나왔는지
+
+        if (ran <= turep) { //옳은 코딩이 나올 확률
 
             longIndex = Random.Range(0, trueKeyWordList.Count);
             keyWord = trueKeyWordList[longIndex]; //인덱스 초과
