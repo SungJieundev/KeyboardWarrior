@@ -56,7 +56,7 @@ public class ShowKeyWord : MonoBehaviour
 
         sequence.OnComplete(() => {
 
-            CompareChar.instance.Compare();
+            CompareChar.instance.Compare(keyWordType);
         });
 
         // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
