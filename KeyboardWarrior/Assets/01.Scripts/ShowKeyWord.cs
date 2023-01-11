@@ -10,6 +10,8 @@ using DG.Tweening;
 
 public class ShowKeyWord : MonoBehaviour
 {
+    private CompareChar compareChar;
+
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드
     private string keyWord; //키워드를 저장할 변수
 
@@ -21,19 +23,18 @@ public class ShowKeyWord : MonoBehaviour
     private int longIndex; //
     private int shortIndex;
 
-    private float ttttt;
-
     private string keyWordType; //키워드 타입 (옳, 옳 않)
 
     private float duration = 1.5f; //키워드 타이핑 지속시간
 
     private void Awake() {
 
+        compareChar = GetComponent<CompareChar>();
         keyWordTxt.text = "null";
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.J)) keyWordShow(); //테스트용
-        if (Input.GetKeyDown(KeyCode.K)) CompareChar.instance.AllKeyBoardTrue(); //테스트용
+        if (Input.GetKeyDown(KeyCode.K)) compareChar.AllKeyBoardTrue(); //테스트용
     }
 
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰 / 시작
@@ -63,7 +64,7 @@ public class ShowKeyWord : MonoBehaviour
 
         sequence.OnComplete(() => {
 
-            CompareChar.instance.Compare(keyWordType);
+            compareChar.Compare(keyWordType);
         });
 
         // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중

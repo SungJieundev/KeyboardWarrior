@@ -8,14 +8,6 @@ using TMPro;
 
 public class DoTweens : MonoBehaviour
 {
-    public static DoTweens instance;
-
-    private void Awake() {
-        if (!instance) instance = this;
-        else { Destroy(gameObject); }
-    }
-
-
     public void DoString(string msg, TextMeshProUGUI txt, float time) { //글자 타닥타닥 해주는 거        
 
         txt.DOText(msg, time);
