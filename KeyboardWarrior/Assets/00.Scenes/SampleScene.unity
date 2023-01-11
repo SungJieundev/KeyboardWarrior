@@ -394,6 +394,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allChildKeyBoardList: []
   feverCount: 5
+  feverKeyBoardIndex: 0
+  needFK: 0
   testColor:
   - {r: 1, g: 0.48490566, b: 0.48490566, a: 1}
   - {r: 1, g: 0.96697, b: 0.53207546, a: 1}
@@ -432,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7aa7d981316fec49b226f900ee37a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showKeyWord: {fileID: 17935841}
   keyWordTxt: {fileID: 191859494}
   startMsg:
   - Start
@@ -439,6 +442,8 @@ MonoBehaviour:
   - 2
   - 1
   gameDelay: 2
+  isDone: 1
+  isPlayer: 1
 --- !u!1 &22124947
 GameObject:
   m_ObjectHideFlags: 0
