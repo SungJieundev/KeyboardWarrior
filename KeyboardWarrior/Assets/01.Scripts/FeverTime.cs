@@ -5,6 +5,7 @@ using UnityEngine;
 public class FeverTime : MonoBehaviour
 {
     private CompareChar compareChar;
+    private KeyboardPushed keyboardPushed;
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
     private int triggerCount = 0; // 피버타임을 발동하기 위한 목표 횟수
 
@@ -22,16 +23,16 @@ public class FeverTime : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.S)){
             RandomFeverKeyBoardRoutine();
-            Debug.Log(feverKeyBoardChar);
+            Debug.Log($"뽑힌 피버키보드 : {feverKeyBoardChar}");
         }
     }
 
-    private void RandomFeverKeyBoardRoutine(){
+    public void RandomFeverKeyBoardRoutine(){
 
         RandomFeverKeyBoard(); // 피버키보드 뽑기
 
         // 만약 피버키보드가 사라질 예정이라면 다시 뽑기
-        while(!compareChar.keyWord.Contains(feverKeyBoardChar)){
+        while(compareChar.keyWord.Contains(feverKeyBoardChar)){
 
             RandomFeverKeyBoard();
         }
