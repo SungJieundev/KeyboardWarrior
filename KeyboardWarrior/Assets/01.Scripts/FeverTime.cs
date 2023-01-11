@@ -22,10 +22,15 @@ public class FeverTime : MonoBehaviour
     private void Update() {
         
         if(Input.GetKeyDown(KeyCode.S)){
-            RandomFeverKeyBoardRoutine(); //- 얘가 문제라서 주석처리 해둠
-            StartCoroutine(Routine());
+            
+            StartCoroutine(ColorRoutine());
 
             Debug.Log(feverKeyBoardChar);
+        }
+
+        if(Input.GetKeyDown(KeyCode.A)){
+
+            RandomFeverKeyBoardRoutine();
         }
     }
 
@@ -35,10 +40,14 @@ public class FeverTime : MonoBehaviour
 
         // 만약 피버키보드가 사라질 예정이라면 다시 뽑기
 
-        while(compareChar.keyWord.Contains(feverKeyBoardChar)){ //- 얘가 문제임, 안 멈춰서 터졌던 거
+        while(compareChar.keyWord.Contains(feverKeyBoardChar) && 
+            GameObject.Find(feverKeyBoardChar.ToString()).GetComponent<SpriteRenderer>().enabled == false &&
+            feverKeyBoardChar ==  compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0]){ //- 얘가 문제임, 안 멈춰서 터졌던 거
 
             RandomFeverKeyBoard();
         }
+
+        FeverColor(Color.yellow);
 
         // 뽑은 피버키보드를 밟으면 currentTriggerCount++
         
@@ -60,64 +69,16 @@ public class FeverTime : MonoBehaviour
 
     private void StartFeverTime(){
 
-        StartCoroutine(Routine());
-        
-        // if(currentTriggerCount >= triggerCount){
-
-            // Sequence seq = DOTween.Sequence();
-
-            // seq.Append(keyboardPushed.sr.DOColor(Color.red, 0.1f));
-            // seq.Append(keyboardPushed.sr.DOColor(Color.yellow, 0.1f));
-            // seq.Append(keyboardPushed.sr.DOColor(Color.green, 0.1f));
-            // seq.Append(keyboardPushed.sr.DOColor(Color.blue, 0.1f));
-            // seq.Append(keyboardPushed.sr.DOColor(Color.magenta, 0.1f));
-            // seq.Append(keyboardPushed.sr.DOColor(Color.white, 0.1f));
-            
-            // seq.OnComplete(() => {
-
-            //     compareChar.AllKeyBoardTrue();
-            // });
-        //}
+        StartCoroutine(ColorRoutine());
     }
-    private bool isDone = false;
 
-    IEnumerator Routine(){
+    public void FeverColor(Color color){
+
+        compareChar.childkeyBoardls[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
+    }
+
+    IEnumerator ColorRoutine(){
         
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.red;
-        // }
-        // yield return new WaitForSeconds(.1f);
-        
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.yellow;
-        // }
-
-        // yield return new WaitForSeconds(.1f);
-
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.green;
-        // }
-        // yield return new WaitForSeconds(.1f);
-
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.blue;
-        // }
-        // yield return new WaitForSeconds(.1f);
-
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.magenta;
-        // }
-        // yield return new WaitForSeconds(.1f);
-
-        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
-        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.white;
-        // }
-
-        // yield return new WaitForSeconds(.1f);
-        // isDone = true;
-
-        // yield return new WaitUntil(()=>isDone);
 
         for (int j = 0; j < testColor.Count; j++) { //팔레트 수 만큼
 
@@ -125,9 +86,9 @@ public class FeverTime : MonoBehaviour
 
                 compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = testColor[j];;
             }
-            yield return new WaitForSeconds(0.2f); //몇 초 있다가 색 바뀌게 할건지
+            yield return new WaitForSeconds(0.1f); //몇 초 있다가 색 바뀌게 할건지
         }
 
-        compareChar.AllKeyBoardTrue(); //보상
+        //compareChar.AllKeyBoardTrue(); //보상
     }
 }
