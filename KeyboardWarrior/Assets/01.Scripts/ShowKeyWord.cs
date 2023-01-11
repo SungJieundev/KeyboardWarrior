@@ -23,7 +23,7 @@ public class ShowKeyWord : MonoBehaviour
 
     [SerializeField] private int truep; // 키워드가 옳을 활률
     [SerializeField] private int falsep; //키워드가 옳지 않을 확률
-    private int longIndex; //
+    private int longIndex;
     private int shortIndex;
 
     private string keyWordType; //키워드 타입 (옳, 옳 않)
@@ -35,14 +35,6 @@ public class ShowKeyWord : MonoBehaviour
         compareChar = GetComponent<CompareChar>();
         feverTime = GetComponent<FeverTime>();
         changeBGColor = GetComponent<ChangeBGColor>();
-    }
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.J)) {
-
-            keyWordShow(); //테스트용
-            changeBGColor.Change();
-        }
-        if (Input.GetKeyDown(KeyCode.K)) compareChar.AllKeyBoardTrue(); //테스트용
     }
 
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요

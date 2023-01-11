@@ -8,6 +8,8 @@ using TMPro;
 
 public class DoTweens : MonoBehaviour
 {
+    [SerializeField] private int dotCount;
+
     public void DoString(string msg, TextMeshProUGUI txt, float time) { //글자 타닥타닥 해주는 거        
 
         txt.DOText(msg, time);
@@ -20,14 +22,17 @@ public class DoTweens : MonoBehaviour
 
     public void LoopColor(List<GameObject> obj, Color currentColor, Color endColor, float time){
 
-        for (int i = 0; i < obj.Count; i++) {
+        for (int i = 0; i < dotCount; i++) {
 
-            Material objMaterial = obj[i].GetComponent<Material>();
+            for (int j = 0; j < obj.Count; j++) {
 
-            Sequence sequence = DOTween.Sequence();
-            
-            sequence.Append(objMaterial.DOColor(endColor, time));
-            sequence.Append(objMaterial.DOColor(currentColor, time));
+                Material objMaterial = obj[j].GetComponent<Material>();
+
+                Sequence sequence = DOTween.Sequence();
+                
+                sequence.Append(objMaterial.DOColor(endColor, time));
+                sequence.Append(objMaterial.DOColor(currentColor, time));
+            }
         }
     }
 }

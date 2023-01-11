@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FeverTime : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> allChildKeyBoardList = new List<GameObject>();
+    [SerializeField] private int feverCount, feverMaxCount;
     private CompareChar compareChar;
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
     private int triggerCount = 0; // 피버타임을 발동하기 위한 목표 횟수
@@ -12,27 +14,26 @@ public class FeverTime : MonoBehaviour
     private char feverKeyBoardChar;
     
     [SerializeField] private List<Color> testColor = new List<Color>(); 
-    //팔레트 담아둔 리스트, SerializeField 거슬리면 Awake에서 값 넣어주기 - 색 임의로 내가 해둔거라 너가 바꿔줘
 
     private void Awake() {
         
         compareChar = GetComponent<CompareChar>();
     }
 
-    private void Update() {
+    // private void Update() {
         
-        if(Input.GetKeyDown(KeyCode.S)){
+    //     if(Input.GetKeyDown(KeyCode.S)){
             
-            StartCoroutine(ColorRoutine());
+    //         StartCoroutine(ColorRoutine());
 
-            Debug.Log(feverKeyBoardChar);
-        }
+    //         Debug.Log(feverKeyBoardChar);
+    //     }
 
-        if(Input.GetKeyDown(KeyCode.A)){
+    //     if(Input.GetKeyDown(KeyCode.A)){
 
-            RandomFeverKeyBoardRoutine();
-        }
-    }
+    //         RandomFeverKeyBoardRoutine();
+    //     }
+    // }
 
     public void RandomFeverKeyBoardRoutine(){
 
@@ -48,18 +49,7 @@ public class FeverTime : MonoBehaviour
         }
 
         FeverColor(Color.yellow);
-
-        // 뽑은 피버키보드를 밟으면 currentTriggerCount++
-        
-        
-        // 만약 currentTriggerCount >= triggerCount 라면
-        // 피버타임을 시작하기
-
-        // 만약 피버타임을 시작하면
-        // 현재 키보드리스트를 다 검사하여 꺼져있는 스프라이트 렌더러를 전부 켜주기
     }
-
-    private GameObject[] childs;
 
     private void RandomFeverKeyBoard(){
 
@@ -67,28 +57,32 @@ public class FeverTime : MonoBehaviour
         feverKeyBoardChar = compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0];    
     }
 
-    private void StartFeverTime(){
-
-        StartCoroutine(ColorRoutine());
-    }
-
     public void FeverColor(Color color){
 
-        compareChar.childkeyBoardls[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
+        allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
+    }
+
+    public void FeverKeyTirgger() { //플레이어 이동할 때 마다 돌리면서 검사하면 됨
+
+        if (!allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().enabled) {
+
+            feverCount--;
+            FeverColor(Color.white);
+            if (feverCount >= feverMaxCount) StartCoroutine(ColorRoutine());
+        }
     }
 
     IEnumerator ColorRoutine(){
         
-
         for (int j = 0; j < testColor.Count; j++) { //팔레트 수 만큼
 
-            for (int i = 0; i < compareChar.childkeyBoardls.Count; i++) { //키보드 수 만큼
+            for (int i = 0; i < allChildKeyBoardList.Count; i++) { //키보드 수 만큼
 
-                compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = testColor[j];
+                allChildKeyBoardList[i].GetComponent<SpriteRenderer>().color = testColor[j];
             }
             yield return new WaitForSeconds(0.1f); //몇 초 있다가 색 바뀌게 할건지
         }
 
-        //compareChar.AllKeyBoardTrue(); //보상
+        compareChar.AllKeyBoardTrue(); //보상
     }
 }

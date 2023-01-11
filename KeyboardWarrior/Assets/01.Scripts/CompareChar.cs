@@ -57,9 +57,11 @@ public class CompareChar : MonoBehaviour
                         childKeyBoard = childkeyBoardls[j].GetComponent<SpriteRenderer>(); //현재 자식 키보드 SpriteRenderer 받아오기
 
                         if (parentKeyBoard.enabled || childKeyBoard.enabled)
-                            TrueKeyBoardSave(); //옳은 키보드(비영구) 복구할 키보드 저장하기
+                            KeyBoardSave(keyWordType); //옳은 키보드(비영구) 복구할 키보드 저장하기
 
-                        TrueKeyBoardFalse(); //옳은 키보드(비영구) 끄기
+                        doTweens.LoopColor(previousKeyBoard, Color.white, Color.green, 0.5f);
+
+                        KeyBoardFalse(); //옳은 키보드(비영구) 끄기
                     }
                 }
 
@@ -70,7 +72,11 @@ public class CompareChar : MonoBehaviour
                         parentKeyBoard = parentkeyBoardls[j].GetComponent<SpriteRenderer>(); //현재 부모 키보드 SpriteRenderer 받아오기
                         childKeyBoard = childkeyBoardls[j].GetComponent<SpriteRenderer>(); //현재 자식 키보드 SpriteRenderer 받아오기
 
-                        FalseKeyBoardFalse(); // = 구멍이 뚫린 거 처럼 보임 / SetActive 안 하는 이유는 충돌 감지를 계속 해야하기 때문
+                        KeyBoardSave(keyWordType);
+
+                        doTweens.LoopColor(previousKeyBoard, Color.white, Color.red, 0.5f);
+
+                        KeyBoardFalse(); //옳지 않은 키보드(영구) 끄기
                     }
                 }
                 else { Debug.LogError("코딩이 옳지도 옳지 않지도 않음 == 오류");} //이거 뜨면 showkeyword의 확률 문제
@@ -78,7 +84,7 @@ public class CompareChar : MonoBehaviour
         }
     }
 
-    public void TrueKeyBoardFalse() { //옳은 키워드 키보드 끄기 = 끄기 반전
+    public void KeyBoardFalse() { //옳은 키워드 키보드 끄기 = 끄기 반전
 
         parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
         childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
@@ -92,14 +98,6 @@ public class CompareChar : MonoBehaviour
         }
 
         KeyWordClear();
-    }
-
-    public void FalseKeyBoardFalse() { //옳지 않은 키워드 키보드 끄기 = 정상
-
-        parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
-        childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
-
-        Invoke("KeyWordClear", 1f);
     }
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상 (테스트 성공)
@@ -117,12 +115,12 @@ public class CompareChar : MonoBehaviour
         previousKeyBoard.Clear();
     }
 
-    public void TrueKeyBoardSave() { //옳은 코딩(비영구)라면 복구를 위해 삭제한 키보드를 담아둠 - 수정해야함.
+    public void KeyBoardSave(string keyWordType) { //옳은 코딩(비영구)라면 복구를 위해 삭제한 키보드를 담아둠 - 수정해야함.
 
         previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
         previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
 
-        Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
+        if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
     }
 
     public void KeyWordClear() { //제시어 칸 청소 - 

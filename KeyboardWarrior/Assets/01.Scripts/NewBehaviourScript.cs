@@ -38,6 +38,7 @@ public class NewBehaviourScript : MonoBehaviour
     IEnumerator StartMsg() { //시작 메세지를 띄워주는 메서드
 
         for (int i = 0; i < startMsg.Length; i++) {
+            
             keyWordTxt.text = startMsg[i];
             yield return new WaitForSeconds(0.7f);
             keyWordTxt.text = "";
