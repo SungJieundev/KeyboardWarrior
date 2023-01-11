@@ -30,9 +30,16 @@ public class DoTweens : MonoBehaviour
 
                 Sequence sequence = DOTween.Sequence();
                 
+                Debug.Log("loopColor");
                 sequence.Append(objMaterial.DOColor(endColor, time));
                 sequence.Append(objMaterial.DOColor(currentColor, time));
+
             }
         }
+    }
+
+    public void PanelDown(){
+
+
     }
 }
