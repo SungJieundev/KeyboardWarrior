@@ -22,20 +22,28 @@ public class DoTweens : MonoBehaviour
 
     public void LoopColor(GameObject obj, Color currentColor, Color endColor, float time){
 
-        for (int i = 0; i < dotCount; i++) {
+        SpriteRenderer objsr = obj.GetComponent<SpriteRenderer>();
 
-            Material objMaterial = obj.GetComponent<Material>();
-
-            Sequence sequence = DOTween.Sequence();
-            
-            Debug.Log("loopColor");
-            sequence.Append(objMaterial.DOColor(endColor, time));
-            sequence.Append(objMaterial.DOColor(currentColor, time));
-        }
+        Sequence sequence = DOTween.Sequence();
+    
+        sequence.Append(objsr.DOColor(endColor, time));
+        sequence.Append(objsr.DOColor(currentColor, time));
+        
     }
 
-    public void PanelDown(){
+    private Vector3 originalTransform;
 
+    public void PanelDown(GameObject panel){
+
+        originalTransform = panel.transform.position;
+
+        panel.transform.DOLocalMove(new Vector3(0, 26f, 0), 1f);
 
     }
+
+    public void PanelUp(GameObject panel){
+
+        panel.transform.DOMove(originalTransform, 0.5f);
+    }
+    
 }
