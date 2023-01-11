@@ -84,7 +84,7 @@ public class FeverTime : MonoBehaviour
 
             for (int i = 0; i < compareChar.childkeyBoardls.Count; i++) { //키보드 수 만큼
 
-                compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = testColor[j];;
+                compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = testColor[j];
             }
             yield return new WaitForSeconds(0.1f); //몇 초 있다가 색 바뀌게 할건지
         }
