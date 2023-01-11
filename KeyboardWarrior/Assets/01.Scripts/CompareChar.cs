@@ -31,79 +31,32 @@ public class CompareChar : MonoBehaviour
         if (!instance) instance = this;
         else { Destroy(gameObject); }
     }
-
-    public List<string> testt = new List<string>();
     public void Compare(string keyWordType) {
         
         keyWord = keyWordTxt.text;
 
         for (int i = 0; i < keyWord.Length; i++) { //제시어 글자 수 만큼 반복 
-            testt.Add(keyWord[i].ToString());
 
             for (int j = 0; j < keyBoard.Count; j++) { //키보드 수 만큼 반복
 
                 if (keyWordType == "trueT") { //옳은 코딩이 호출됐다면(비영구) - 제시어를 제외한 모든 키보드를 삭제 - 문제
 
-                    // testt[i] += keyWord[i].ToString(); //인덱스 0 자리부터 키워드 0번째 글자 하나씩 넣어줌
+                    if (!keyWord.Contains(keyBoard[j].name)) { //bnm 일 때 변하는건 j값만,,
+                        
+                        parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
+                        childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
 
-                        if (!keyWord.Contains(keyBoard[j].name)) { //bnm 일 때 변하는건 j값만,,
-                            
-                            // Debug.Log($"{testt[k]} - {j} + {i}");
-                            parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
-                            childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
 
-                            DoTweens.instance.DoTColor(childKeyBoard.gameObject,
-                                Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
-                            //다트윈 시간이 끝나면 아래의 .enabled 실행
+                        DoTweens.instance.DoTColor(childKeyBoard.gameObject,
+                            Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
+                        //다트윈 시간이 끝나면 아래의 .enabled 실행
 
-                            TrueKeyBoardFalse(); // = 구멍이 뚫린 거 처럼 보임 / SetActive 안 하는 이유는 충돌 감지를 계속 해야하기 때문
-                            
-                            KeyWordTypeCompare(keyWordType); //키워드 타입 비교 / 영구, 비영구 / 매개변수 = 키워드 타입
-                        }
-                        else { Debug.Log("현재 j번은 키워드에 들어감 ㅇㅇ");}
+                        TrueKeyBoardFalse(); // = 구멍이 뚫린 거 처럼 보임 / SetActive 안 하는 이유는 충돌 감지를 계속 해야하기 때문
+                        
+                    }
+                    KeyWordTypeCompare(keyWordType); //키워드 타입 비교 / 영구, 비영구 / 매개변수 = 키워드 타입
                 }
 
-                // if (keyWordType == "trueT") { //옳은 코딩이 호출됐다면(비영구) - 제시어를 제외한 모든 키보드를 삭제 - 문제
-
-                //     // testt[i] += keyWord[i].ToString(); //인덱스 0 자리부터 키워드 0번째 글자 하나씩 넣어줌
-                //     for (int k = 0; k < testt.Count; k++) {
-
-                //         if (!keyBoard[j].name.Contains(testt[k])) { //j가 n일 때 k는 n m o p 다 돌아감 & 비교됨
-                            
-                //             Debug.Log($"{testt[k]} - {j} + {i}");
-                //             parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
-                //             childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
-
-                //             DoTweens.instance.DoTColor(childKeyBoard.gameObject,
-                //                 Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
-                //             //다트윈 시간이 끝나면 아래의 .enabled 실행
-
-                //             TrueKeyBoardFalse(); // = 구멍이 뚫린 거 처럼 보임 / SetActive 안 하는 이유는 충돌 감지를 계속 해야하기 때문
-                            
-                //             KeyWordTypeCompare(keyWordType); //키워드 타입 비교 / 영구, 비영구 / 매개변수 = 키워드 타입
-                //         }
-                //         else { Debug.Log("현재 j번은 키워드에 들어감 ㅇㅇ");}
-                //     }
-                // }
-                // if (keyWordType == "trueT") { //옳은 코딩이 호출됐다면(비영구) - 제시어를 제외한 모든 키보드를 삭제 - 문제
-                //     //오류 터짐, 다 꺼짐 ㅇㅇ;
-                //     if (keyWord[i].ToString() != keyBoard[j].name) { //제시어의 n번째 글자와 키보드의 m번째 이름이 맞지 않다면
-                //         if (keyBoard[j].name.Contains()) {
-                //             Debug.Log("A");
-                //         }
-                //         parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
-                //         childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
-
-                //         DoTweens.instance.DoTColor(childKeyBoard.gameObject,
-                //             Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
-                //         //다트윈 시간이 끝나면 아래의 .enabled 실행
-
-                //         TrueKeyBoardFalse(); // = 구멍이 뚫린 거 처럼 보임 / SetActive 안 하는 이유는 충돌 감지를 계속 해야하기 때문
-                        
-                //         KeyWordTypeCompare(keyWordType); //키워드 타입 비교 / 영구, 비영구 / 매개변수 = 키워드 타입
-                //     }
-
-                // }
                 else if (keyWordType == "falseT") { //옳지 않은 코딩이 호출됐다면(영구) - 제시어를 포함한 키보드를 삭제 - 정상
 
                     if (keyWord[i].ToString() == keyBoard[j].name) { //제시어의 n번째 글자와 키보드의 m번째 이름이 맞다면
@@ -123,24 +76,28 @@ public class CompareChar : MonoBehaviour
         }
     }
 
-    private void TrueKeyBoardFalse() { //옳은 키워드 키보드 끄기 = 끄기 반전
+    public void TrueKeyBoardFalse() { //옳은 키워드 키보드 끄기 = 끄기 반전
 
         parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
         childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
 
-        // Invoke("TrueKeyBoardTrue", 2f);
+        Invoke("TrueKeyBoardTrue", 2f);
     }
 
-    private void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
+    public void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
 
-        foreach (GameObject aa in previousKeyBoard) {
+        foreach (GameObject previousKBList in previousKeyBoard) { //복구해야할 키보드를 담아둔 리스트를 전부 반복
 
-            aa.GetComponent<SpriteRenderer>().enabled = true;
-            aa.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true; //- 오류가 많이 뜸
+            previousKBList.GetComponent<SpriteRenderer>().enabled = true; //리스트 값 전부를 켜 준다.
+
+            previousKBList.CompareTag(null);
         }
+
+        keyWordTxt.text = "";
     }
 
-    private void FalseKeyBoardFalse() { //옳지 않은 키워드 키보드 끄기 = 정상
+    public void FalseKeyBoardFalse() { //옳지 않은 키워드 키보드 끄기 = 정상
+
         parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
         childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
     }
@@ -151,16 +108,19 @@ public class CompareChar : MonoBehaviour
 
             dd.GetComponent<SpriteRenderer>().enabled = true;
             dd.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
+
+            //피버타임 문구 띄우기
         }
     }
 
-    private void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
+    public void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
         previousKeyBoard.Clear();
     }
 
-    private void KeyWordTypeCompare(string keyWordType) { //옳은 코딩(비영구)라면 복구를 위해 삭제한 키보드를 담아둠
+    public void KeyWordTypeCompare(string keyWordType) { //옳은 코딩(비영구)라면 복구를 위해 삭제한 키보드를 담아둠
 
-        // Debug.Log("옳은 코딩");
+        // Debug.Log("옳은 코딩"); - 시간 날 때 리스트에 중복되는 값 없애는 코드 짜기
+        //조건 걸기 - 영구용으로 꺼진 애들은 담지 않는다..
 
         previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
         previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
