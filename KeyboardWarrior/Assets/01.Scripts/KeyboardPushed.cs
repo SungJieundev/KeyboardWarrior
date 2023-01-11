@@ -18,6 +18,8 @@ public class KeyboardPushed : MonoBehaviour
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
             curKeyName = gameObject.name;
+
+            if (!sr.enabled) Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이
         }
     }
 
