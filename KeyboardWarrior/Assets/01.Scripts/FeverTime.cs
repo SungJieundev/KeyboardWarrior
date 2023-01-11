@@ -34,7 +34,7 @@ public class FeverTime : MonoBehaviour
         }
     }
 
-    private void RandomFeverKeyBoardRoutine(){
+    public void RandomFeverKeyBoardRoutine(){
 
         RandomFeverKeyBoard(); // 피버키보드 뽑기
 

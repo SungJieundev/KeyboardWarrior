@@ -11,6 +11,8 @@ using DG.Tweening;
 
 public class CompareChar : MonoBehaviour
 {
+    DoTweens doTweens;
+
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
     public string keyWord; //키워드 받아오는 변수
@@ -33,11 +35,15 @@ public class CompareChar : MonoBehaviour
             childkeyBoardls.Add(parentkeyBoardls[i].transform.GetChild(0).gameObject);
     }
 
+    private void Awake() {
+        doTweens = GetComponent<DoTweens>();
+    }
+
     public void Compare(string keyWordType) {
         
         keyWord = keyWordTxt.text; //현재 키워드 받아오기
 
-        PreviousSaveListClear();
+        PreviousSaveListClear(); //복구할 키보드 담아둔 리스트 클리어
 
         for (int i = 0; i < keyWord.Length; i++) { //제시어 글자 수 만큼 반복 
 

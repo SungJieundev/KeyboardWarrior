@@ -11,6 +11,7 @@ using DG.Tweening;
 public class ShowKeyWord : MonoBehaviour
 {
     private CompareChar compareChar;
+    private FeverTime feverTime;
 
     private ChangeBGColor changeBGColor;
 
@@ -32,8 +33,8 @@ public class ShowKeyWord : MonoBehaviour
     private void Awake() {
 
         compareChar = GetComponent<CompareChar>();
+        feverTime = GetComponent<FeverTime>();
         changeBGColor = GetComponent<ChangeBGColor>();
-        keyWordTxt.text = "null";
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.J)) {
@@ -44,11 +45,9 @@ public class ShowKeyWord : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) compareChar.AllKeyBoardTrue(); //테스트용
     }
 
-    public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰 / 시작
+    public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요
 
         int ran = Random.Range(1, 101);
-
-        // Debug.Log(ran); //확률이 몇이 나왔는지
         
         if (ran >= 1 && ran <= falsep) { //옳지 않은 코딩이 나왔다면
 
@@ -66,15 +65,12 @@ public class ShowKeyWord : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
 
-        //DoTweens.instance.DoString(keyWord, keyWordTxt, duration);
         sequence.Append(keyWordTxt.DOText(keyWord, duration));
 
         sequence.OnComplete(() => {
 
             compareChar.Compare(keyWordType);
+            feverTime.RandomFeverKeyBoardRoutine();
         });
-
-        // DoTweens.instance.DoString(keyWord, keyWordTxt, duration); //현재 수리중
-        //다트윈으로 나타낼 무튼 다트윈 메서드인데 매개변수로 keyWord 넘겨주면 댐 ㅎㅎ;
     }
 }
