@@ -16,6 +16,11 @@ public class FeverTime : MonoBehaviour
     private void Awake() {
         
         compareChar = GetComponent<CompareChar>();
+<<<<<<< Updated upstream
+=======
+       
+        
+>>>>>>> Stashed changes
     }
 
     private void Update() {
@@ -46,12 +51,15 @@ public class FeverTime : MonoBehaviour
         // 현재 키보드리스트를 다 검사하여 꺼져있는 스프라이트 렌더러를 전부 켜주기
     }
 
+    private GameObject[] childs;
+
     private void RandomFeverKeyBoard(){
 
         feverKeyBoardIndex = Random.Range(0, compareChar.keyBoard.Count);
         feverKeyBoardChar = compareChar.keyBoard[feverKeyBoardIndex].name[0];    
     }
 
+<<<<<<< Updated upstream
     private void FeverKeyBoardTrigger(){
 
         
@@ -60,5 +68,63 @@ public class FeverTime : MonoBehaviour
     private void StartFeverTime(){
 
 
+=======
+    private void StartFeverTime(){
+        StartCoroutine(Routine());
+        // if(currentTriggerCount >= triggerCount){
+
+            // Sequence seq = DOTween.Sequence();
+
+            // seq.Append(keyboardPushed.sr.DOColor(Color.red, 0.1f));
+            // seq.Append(keyboardPushed.sr.DOColor(Color.yellow, 0.1f));
+            // seq.Append(keyboardPushed.sr.DOColor(Color.green, 0.1f));
+            // seq.Append(keyboardPushed.sr.DOColor(Color.blue, 0.1f));
+            // seq.Append(keyboardPushed.sr.DOColor(Color.magenta, 0.1f));
+            // seq.Append(keyboardPushed.sr.DOColor(Color.white, 0.1f));
+            
+            // seq.OnComplete(() => {
+
+            //     compareChar.AllKeyBoardTrue();
+            // });
+        //}
+    }
+    private bool isDone = false;
+    IEnumerator Routine(){
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        yield return new WaitForSeconds(.1f);
+        
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.yellow;
+        }
+
+        yield return new WaitForSeconds(.1f);
+
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.green;
+        }
+        yield return new WaitForSeconds(.1f);
+
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        yield return new WaitForSeconds(.1f);
+
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.magenta;
+        }
+        yield return new WaitForSeconds(.1f);
+
+        foreach(GameObject key in compareChar.keyBoard){
+            key.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        yield return new WaitForSeconds(.1f);
+        isDone = true;
+
+        yield return new WaitUntil(()=>isDone);
+
+        compareChar.AllKeyBoardTrue();
+>>>>>>> Stashed changes
     }
 }
