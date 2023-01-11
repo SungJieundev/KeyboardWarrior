@@ -6,6 +6,7 @@ using UnityEngine;
 public class KeyboardPushed : MonoBehaviour
 {
     FeverTime feverTime;
+    GameMain gameMain;
     public SpriteRenderer sr;
 
     public string curKeyName;
@@ -13,6 +14,7 @@ public class KeyboardPushed : MonoBehaviour
     private void Awake() {
 
         feverTime = FindObjectOfType<FeverTime>();
+        gameMain = FindObjectOfType<GameMain>();
         sr = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D other) { //tirgger 충돌한다면
@@ -20,8 +22,12 @@ public class KeyboardPushed : MonoBehaviour
         if (other.CompareTag("Player")) { //충돌한 상대 오브젝트의 태그가 player라면
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
-            feverTime.FeverKeyTirgger();
-            if (!sr.enabled) Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이
+            // feverTime.FeverKeyTirgger();
+            if (!sr.enabled) {
+
+                gameMain.isPlayer = false;
+                Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이
+            }
         }
     }
 

@@ -40,6 +40,7 @@ public class ShowKeyWord : MonoBehaviour
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요
 
         int ran = Random.Range(1, 101);
+        changeBGColor.Change();
         
         if (ran >= 1 && ran <= falsep) { //옳지 않은 코딩이 나왔다면
 

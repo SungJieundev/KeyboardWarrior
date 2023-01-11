@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Buffers;
 using System.Security.Cryptography;
@@ -12,6 +13,7 @@ using DG.Tweening;
 public class CompareChar : MonoBehaviour
 {
     DoTweens doTweens;
+    GameMain gameMain;
 
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
@@ -36,7 +38,9 @@ public class CompareChar : MonoBehaviour
     }
 
     private void Awake() {
+
         doTweens = GetComponent<DoTweens>();
+        gameMain = GetComponent<GameMain>();
     }
 
     public void Compare(string keyWordType) {
@@ -61,7 +65,7 @@ public class CompareChar : MonoBehaviour
 
                         doTweens.LoopColor(previousKeyBoard, Color.white, Color.green, 0.5f);
 
-                        KeyBoardFalse(); //옳은 키보드(비영구) 끄기
+                        KeyBoardFalse(keyWordType); //옳은 키보드(비영구) 끄기
                     }
                 }
 
@@ -76,7 +80,7 @@ public class CompareChar : MonoBehaviour
 
                         doTweens.LoopColor(previousKeyBoard, Color.white, Color.red, 0.5f);
 
-                        KeyBoardFalse(); //옳지 않은 키보드(영구) 끄기
+                        KeyBoardFalse(keyWordType); //옳지 않은 키보드(영구) 끄기
                     }
                 }
                 else { Debug.LogError("코딩이 옳지도 옳지 않지도 않음 == 오류");} //이거 뜨면 showkeyword의 확률 문제
@@ -84,10 +88,12 @@ public class CompareChar : MonoBehaviour
         }
     }
 
-    public void KeyBoardFalse() { //옳은 키워드 키보드 끄기 = 끄기 반전
+    public void KeyBoardFalse(string keyWordType) { //옳은 키워드 키보드 끄기 = 끄기 반전
 
         parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
         childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
+
+        if (keyWordType == "falseT") KeyWordClear();
     }
 
     public void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
@@ -126,5 +132,6 @@ public class CompareChar : MonoBehaviour
     public void KeyWordClear() { //제시어 칸 청소 - 
 
         keyWordTxt.text = "";
+        gameMain.isDone = true;
     }
 }

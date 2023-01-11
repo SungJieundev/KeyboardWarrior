@@ -54,7 +54,7 @@ public class FeverTime : MonoBehaviour
     private void RandomFeverKeyBoard(){
 
         feverKeyBoardIndex = Random.Range(0, compareChar.parentkeyBoardls.Count);
-        feverKeyBoardChar = compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0];    
+        feverKeyBoardChar = compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0];  
     }
 
     public void FeverColor(Color color){
@@ -64,11 +64,14 @@ public class FeverTime : MonoBehaviour
 
     public void FeverKeyTirgger() { //플레이어 이동할 때 마다 돌리면서 검사하면 됨
 
-        if (!allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().enabled) {
+        if (allChildKeyBoardList[feverKeyBoardIndex]) {
 
-            feverCount--;
-            FeverColor(Color.white);
-            if (feverCount == 0) StartCoroutine(ColorRoutine());
+            if (!allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().enabled) {
+
+                feverCount--;
+                FeverColor(Color.white);
+                if (feverCount == 0) StartCoroutine(ColorRoutine());
+            }
         }
     }
 
