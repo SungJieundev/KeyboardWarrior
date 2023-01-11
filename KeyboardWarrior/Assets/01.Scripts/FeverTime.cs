@@ -54,8 +54,8 @@ public class FeverTime : MonoBehaviour
 
     private void RandomFeverKeyBoard(){
 
-        feverKeyBoardIndex = Random.Range(0, compareChar.keyBoard.Count);
-        feverKeyBoardChar = compareChar.keyBoard[feverKeyBoardIndex].name[0];    
+        feverKeyBoardIndex = Random.Range(0, compareChar.parentkeyBoard.Count);
+        feverKeyBoardChar = compareChar.parentkeyBoard[feverKeyBoardIndex].name[0];    
     }
 
     private void StartFeverTime(){

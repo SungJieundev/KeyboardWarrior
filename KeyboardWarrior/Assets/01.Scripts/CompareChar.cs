@@ -16,7 +16,8 @@ public class CompareChar : MonoBehaviour
 
     public string keyWord; //키워드 받아오는 변수
 
-    public List<GameObject> keyBoard = new List<GameObject>(); //이동 가능한 키보드를 담아둔 리스트
+    public List<GameObject> parentkeyBoardls = new List<GameObject>(); //이동 가능한 부모 키보드를 담아둔 리스트
+    public List<GameObject> childkeyBoardls = new List<GameObject>(); //이동 가능한 자식 키보드를 담아둔 리스트
 
 
     private List<GameObject> previousKeyBoard = new List<GameObject>(); //이전의 키보드를 담아둔다.
@@ -25,6 +26,12 @@ public class CompareChar : MonoBehaviour
     private SpriteRenderer childKeyBoard; //키보드 중 자식의 SpriteRenderer를 받아올 변수
 
     [SerializeField] private float duration; //다트윈 지속시간
+
+    private void Start() {
+        
+        foreach (GameObject item in parentkeyBoardls)
+            childkeyBoardls.Add(item);
+    }
 
     private void Awake() {
 
@@ -37,15 +44,14 @@ public class CompareChar : MonoBehaviour
 
         for (int i = 0; i < keyWord.Length; i++) { //제시어 글자 수 만큼 반복 
 
-            for (int j = 0; j < keyBoard.Count; j++) { //키보드 수 만큼 반복
+            for (int j = 0; j < parentkeyBoardls.Count; j++) { //키보드 수 만큼 반복
 
                 if (keyWordType == "trueT") { //옳은 코딩이 호출됐다면(비영구) - 제시어를 제외한 모든 키보드를 삭제 - 문제
 
-                    if (!keyWord.Contains(keyBoard[j].name)) { //bnm 일 때 변하는건 j값만,,
+                    if (!keyWord.Contains(parentkeyBoardls[j].name)) { //bnm 일 때 변하는건 j값만,,
                         
-                        parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
-                        childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
-
+                        parentKeyBoard = parentkeyBoardls[j].GetComponent<SpriteRenderer>();
+                        childKeyBoard = childkeyBoardls[j].GetComponentInChildren<SpriteRenderer>();
 
                         DoTweens.instance.DoTColor(childKeyBoard.gameObject,
                             Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
@@ -59,10 +65,10 @@ public class CompareChar : MonoBehaviour
 
                 else if (keyWordType == "falseT") { //옳지 않은 코딩이 호출됐다면(영구) - 제시어를 포함한 키보드를 삭제 - 정상
 
-                    if (keyWord[i].ToString() == keyBoard[j].name) { //제시어의 n번째 글자와 키보드의 m번째 이름이 맞다면
+                    if (keyWord[i].ToString() == parentkeyBoardls[j].name) { //제시어의 n번째 글자와 키보드의 m번째 이름이 맞다면
 
-                        parentKeyBoard = keyBoard[j].GetComponent<SpriteRenderer>();
-                        childKeyBoard = keyBoard[j].transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
+                        parentKeyBoard = parentkeyBoardls[j].GetComponent<SpriteRenderer>();
+                        childKeyBoard = childkeyBoardls[j].GetComponentInChildren<SpriteRenderer>();
 
                         DoTweens.instance.DoTColor(childKeyBoard.gameObject,
                             Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
@@ -89,22 +95,22 @@ public class CompareChar : MonoBehaviour
         foreach (GameObject previousKBList in previousKeyBoard) { //복구해야할 키보드를 담아둔 리스트를 전부 반복
 
             previousKBList.GetComponent<SpriteRenderer>().enabled = true; //리스트 값 전부를 켜 준다.
-
-            previousKBList.CompareTag(null);
         }
 
-        keyWordTxt.text = "";
+        KeyWordClear();
     }
 
     public void FalseKeyBoardFalse() { //옳지 않은 키워드 키보드 끄기 = 정상
 
         parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
         childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
+
+        Invoke("KeyWordClear", 1f);
     }
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상 (테스트 성공)
     
-        foreach (GameObject dd in keyBoard) {
+        foreach (GameObject dd in parentkeyBoardls) {
 
             dd.GetComponent<SpriteRenderer>().enabled = true;
             dd.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
@@ -126,6 +132,11 @@ public class CompareChar : MonoBehaviour
         previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
 
         Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
+    }
+
+    public void KeyWordClear() {
+
+        keyWordTxt.text = "";
     }
 
 }

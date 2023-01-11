@@ -38,17 +38,9 @@ public class ShowKeyWord : MonoBehaviour
 
     public void keyWordShow() { //이 메서드를 언제 호출하느냐 중요쓰 / 시작
 
-        // // ttttt = 100 / (trueKeyWordList.Count + falseKeyWordList.Count);
-        // ttttt = 100 / (3 + 5);
-        // Debug.Log(ttttt + " 몇 배 해줘야 하는지");
-        // // int ran = Random.Range(1, (int)((trueKeyWordList.Count + falseKeyWordList.Count) * ttttt) + 1);
-        // int ran = Random.Range(1, (int)((3 + 5) * ttttt) + 1);
-        // // Debug.Log((trueKeyWordList.Count + falseKeyWordList.Count) * ttttt + " 응애다 이발");
-        // Debug.Log((3 + 5) * ttttt + " 응애다 이발");
-
         int ran = Random.Range(1, 101);
 
-        Debug.Log(ran); //확률이 몇이 나왔는지
+        // Debug.Log(ran); //확률이 몇이 나왔는지
         
         if (ran >= 1 && ran <= falsep) { //옳지 않은 코딩이 나왔다면
 
