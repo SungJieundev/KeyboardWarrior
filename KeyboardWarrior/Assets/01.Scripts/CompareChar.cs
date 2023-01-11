@@ -11,9 +11,6 @@ using DG.Tweening;
 
 public class CompareChar : MonoBehaviour
 {
-    public static CompareChar instance;
-    
-
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
     public string keyWord; //키워드 받아오는 변수
@@ -36,11 +33,6 @@ public class CompareChar : MonoBehaviour
             childkeyBoardls.Add(parentkeyBoardls[i].transform.GetChild(0).gameObject);
     }
 
-    private void Awake() {
-
-        if (!instance) instance = this;
-        else { Destroy(gameObject); }
-    }
     public void Compare(string keyWordType) {
         
         keyWord = keyWordTxt.text; //현재 키워드 받아오기
