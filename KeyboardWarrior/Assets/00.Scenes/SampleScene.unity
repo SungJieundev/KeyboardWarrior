@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyWordTxt: {fileID: 191859494}
   keyWord: 
-  keyBoard:
+  parentkeyBoardls:
   - {fileID: 826802726}
   - {fileID: 1801943266}
   - {fileID: 249746506}
@@ -362,6 +362,7 @@ MonoBehaviour:
   - {fileID: 638440191}
   - {fileID: 1347459510}
   - {fileID: 690372724}
+  childkeyBoardls: []
   duration: 2
 --- !u!114 &17935844
 MonoBehaviour:
