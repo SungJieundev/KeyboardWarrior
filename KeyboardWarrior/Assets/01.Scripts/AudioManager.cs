@@ -3,39 +3,20 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private static AudioManager instance = null;
-    public static AudioManager Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = FindObjectOfType<AudioManager>();
+    private static AudioManager Instance = null;
 
-            return instance;
-        }
+    private void Awake() {
+        
+        if (Instance == null)
+            Instance = this;
     }
-
     
-    [SerializeField] private Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
+    [SerializeField] private List<AudioClip> clips = new List<AudioClip>();
 
-    [SerializeField] AudioSource bgmPlayer = null;
-    [SerializeField] AudioSource systemPlayer = null;
-
-
-    public void PlayBGM(string clipName) => PlayAudio(clipName, bgmPlayer);
-    public void PauseBGM() => bgmPlayer.Pause();
-    public void PlaySystem(string clipName) => PlayAudio(clipName, systemPlayer);
-    public void PauseSystem() => systemPlayer.Pause();
-
-    public void PlayAudio(string clipName, AudioSource player)
+    public void PlayAudio(int index, AudioSource player)
     {
-        if (!clips.ContainsKey(clipName))
-        {
-            Debug.LogWarning("오디오클립에 존재하지 않는 이름");
-            return;
-        }
 
-        player.clip = clips[clipName];
+        player.clip = clips[index];
 
         player.Play();
     }
