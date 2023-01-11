@@ -11,17 +11,20 @@ public class FeverTime : MonoBehaviour
     private int feverKeyBoardIndex;
     private char feverKeyBoardChar;
     
+    [SerializeField] private List<Color> testColor = new List<Color>(); 
+    //팔레트 담아둔 리스트, SerializeField 거슬리면 Awake에서 값 넣어주기 - 색 임의로 내가 해둔거라 너가 바꿔줘
 
     private void Awake() {
         
         compareChar = GetComponent<CompareChar>();
-
     }
 
     private void Update() {
         
         if(Input.GetKeyDown(KeyCode.S)){
-            RandomFeverKeyBoardRoutine();
+            RandomFeverKeyBoardRoutine(); //- 얘가 문제라서 주석처리 해둠
+            StartCoroutine(Routine());
+
             Debug.Log(feverKeyBoardChar);
         }
     }
@@ -31,7 +34,8 @@ public class FeverTime : MonoBehaviour
         RandomFeverKeyBoard(); // 피버키보드 뽑기
 
         // 만약 피버키보드가 사라질 예정이라면 다시 뽑기
-        while(!compareChar.keyWord.Contains(feverKeyBoardChar)){
+
+        while(compareChar.keyWord.Contains(feverKeyBoardChar)){ //- 얘가 문제임, 안 멈춰서 터졌던 거
 
             RandomFeverKeyBoard();
         }
@@ -76,42 +80,54 @@ public class FeverTime : MonoBehaviour
         //}
     }
     private bool isDone = false;
+
     IEnumerator Routine(){
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        yield return new WaitForSeconds(.1f);
         
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.yellow;
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.red;
+        // }
+        // yield return new WaitForSeconds(.1f);
+        
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.yellow;
+        // }
+
+        // yield return new WaitForSeconds(.1f);
+
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.green;
+        // }
+        // yield return new WaitForSeconds(.1f);
+
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.blue;
+        // }
+        // yield return new WaitForSeconds(.1f);
+
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.magenta;
+        // }
+        // yield return new WaitForSeconds(.1f);
+
+        // for(int i = 0; i < compareChar.childkeyBoardls.Count; i++){
+        //     compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = Color.white;
+        // }
+
+        // yield return new WaitForSeconds(.1f);
+        // isDone = true;
+
+        // yield return new WaitUntil(()=>isDone);
+
+        for (int j = 0; j < testColor.Count; j++) { //팔레트 수 만큼
+
+            for (int i = 0; i < compareChar.childkeyBoardls.Count; i++) { //키보드 수 만큼
+
+                compareChar.childkeyBoardls[i].GetComponent<SpriteRenderer>().color = testColor[j];;
+            }
+            yield return new WaitForSeconds(0.2f); //몇 초 있다가 색 바뀌게 할건지
         }
 
-        yield return new WaitForSeconds(.1f);
-
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        yield return new WaitForSeconds(.1f);
-
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.blue;
-        }
-        yield return new WaitForSeconds(.1f);
-
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.magenta;
-        }
-        yield return new WaitForSeconds(.1f);
-
-        foreach(GameObject key in compareChar.childkeyBoardls){
-            key.GetComponent<SpriteRenderer>().color = Color.white;
-        }
-        yield return new WaitForSeconds(.1f);
-        isDone = true;
-
-        yield return new WaitUntil(()=>isDone);
-
-        compareChar.AllKeyBoardTrue();
-
+        compareChar.AllKeyBoardTrue(); //보상
     }
 }
