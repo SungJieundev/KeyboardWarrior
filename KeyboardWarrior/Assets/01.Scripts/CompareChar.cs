@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using System.Buffers;
 using System.Security.Cryptography;
 using System.Linq;
 using System.ComponentModel.Design;
@@ -29,8 +31,8 @@ public class CompareChar : MonoBehaviour
 
     private void Start() {
         
-        foreach (GameObject item in parentkeyBoardls)
-            childkeyBoardls.Add(item);
+        for (int i = 0; i < parentkeyBoardls.Count; i++)
+            childkeyBoardls.Add(parentkeyBoardls[i].transform.GetChild(0).gameObject);
     }
 
     private void Awake() {
@@ -51,7 +53,7 @@ public class CompareChar : MonoBehaviour
                     if (!keyWord.Contains(parentkeyBoardls[j].name)) { //bnm 일 때 변하는건 j값만,,
                         
                         parentKeyBoard = parentkeyBoardls[j].GetComponent<SpriteRenderer>();
-                        childKeyBoard = childkeyBoardls[j].GetComponentInChildren<SpriteRenderer>();
+                        childKeyBoard = childkeyBoardls[j].GetComponent<SpriteRenderer>();
 
                         DoTweens.instance.DoTColor(childKeyBoard.gameObject,
                             Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
@@ -68,7 +70,7 @@ public class CompareChar : MonoBehaviour
                     if (keyWord[i].ToString() == parentkeyBoardls[j].name) { //제시어의 n번째 글자와 키보드의 m번째 이름이 맞다면
 
                         parentKeyBoard = parentkeyBoardls[j].GetComponent<SpriteRenderer>();
-                        childKeyBoard = childkeyBoardls[j].GetComponentInChildren<SpriteRenderer>();
+                        childKeyBoard = childkeyBoardls[j].GetComponent<SpriteRenderer>();
 
                         DoTweens.instance.DoTColor(childKeyBoard.gameObject,
                             Color.red, duration); //키보드의 자식(레이어가 더 위)의 색으로 경고를 표시한다.
@@ -109,13 +111,11 @@ public class CompareChar : MonoBehaviour
     }
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상 (테스트 성공)
-    
-        foreach (GameObject dd in parentkeyBoardls) {
 
-            dd.GetComponent<SpriteRenderer>().enabled = true;
-            dd.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
-
-            //피버타임 문구 띄우기
+        //피버타임 문구 띄우기
+        for (int i = 0; i < parentkeyBoardls.Count; i++) {
+            parentkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
+            childkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
