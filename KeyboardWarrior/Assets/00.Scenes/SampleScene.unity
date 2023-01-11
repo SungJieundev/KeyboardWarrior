@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 17935844}
   - component: {fileID: 17935845}
   - component: {fileID: 17935846}
+  - component: {fileID: 17935847}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -365,7 +366,7 @@ MonoBehaviour:
   - {fileID: 690372724}
   childkeyBoardls: []
   previousKeyBoard: []
-  duration: 2
+  duration: 1.5
 --- !u!114 &17935844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf8333f8f5a4654396c08e9bb1f1bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotCount: 0
+  dotCount: 2
 --- !u!114 &17935845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,8 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allChildKeyBoardList: []
-  feverCount: 0
-  feverMaxCount: 0
+  feverCount: 5
   testColor:
   - {r: 1, g: 0.48490566, b: 0.48490566, a: 1}
   - {r: 1, g: 0.96697, b: 0.53207546, a: 1}
@@ -420,6 +420,25 @@ MonoBehaviour:
   - {r: 0, g: 0.6218067, b: 0.9245283, a: 1}
   - {r: 0, g: 0.8679245, b: 0.6419283, a: 1}
   mainCamera: {fileID: 1346185905}
+--- !u!114 &17935847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7aa7d981316fec49b226f900ee37a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyWordTxt: {fileID: 191859494}
+  startMsg:
+  - Start
+  - 3
+  - 2
+  - 1
+  gameDelay: 2
 --- !u!1 &22124947
 GameObject:
   m_ObjectHideFlags: 0

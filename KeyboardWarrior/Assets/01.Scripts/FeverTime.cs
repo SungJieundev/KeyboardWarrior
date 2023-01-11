@@ -5,7 +5,7 @@ using UnityEngine;
 public class FeverTime : MonoBehaviour
 {
     [SerializeField] private List<GameObject> allChildKeyBoardList = new List<GameObject>();
-    [SerializeField] private int feverCount, feverMaxCount;
+    [SerializeField] private int feverCount;
     private CompareChar compareChar;
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
     private int triggerCount = 0; // 피버타임을 발동하기 위한 목표 횟수
@@ -59,7 +59,7 @@ public class FeverTime : MonoBehaviour
 
     public void FeverColor(Color color){
 
-        allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
+        compareChar.childkeyBoardls[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
     }
 
     public void FeverKeyTirgger() { //플레이어 이동할 때 마다 돌리면서 검사하면 됨
@@ -68,7 +68,7 @@ public class FeverTime : MonoBehaviour
 
             feverCount--;
             FeverColor(Color.white);
-            if (feverCount >= feverMaxCount) StartCoroutine(ColorRoutine());
+            if (feverCount == 0) StartCoroutine(ColorRoutine());
         }
     }
 

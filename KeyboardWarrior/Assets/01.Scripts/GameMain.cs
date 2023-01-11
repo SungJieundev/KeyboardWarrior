@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameMain : MonoBehaviour
 {
-    ShowKeyWord showKeyWord;
+    [SerializeField] ShowKeyWord showKeyWord;
 
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드
 
@@ -18,11 +18,6 @@ public class NewBehaviourScript : MonoBehaviour
         StartCoroutine(StartMsg()); //처음 Start 3 2 1 띄워주는 메서드
 
         StartCoroutine(Game()); //한 턴의 게임을 담아둔 Game 코루틴 시작
-    }
-
-    private void Awake() {
-
-        showKeyWord.GetComponent<ShowKeyWord>();
     }
 
     IEnumerator Game() { //한 턴의 게임
