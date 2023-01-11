@@ -291,8 +291,8 @@ MonoBehaviour:
   - hjkl
   - zxcv
   - bnm
-  truep: 70
-  falsep: 30
+  truep: 100
+  falsep: 10
 --- !u!4 &17935842
 Transform:
   m_ObjectHideFlags: 0
@@ -361,6 +361,7 @@ MonoBehaviour:
   - {fileID: 1347459510}
   - {fileID: 690372724}
   duration: 2
+  testt: []
 --- !u!114 &17935844
 MonoBehaviour:
   m_ObjectHideFlags: 0
