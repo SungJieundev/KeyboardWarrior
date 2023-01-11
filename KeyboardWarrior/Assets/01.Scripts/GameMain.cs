@@ -32,7 +32,6 @@ public class GameMain : MonoBehaviour
 
             if (test) {
 
-                Debug.Log("tltltltltl");
                 showKeyWord.keyWordShow(); //키워드를 제시해준다
                 isDone = false;
                 //옳, 옳 않을 특정 확률로 구해 그 종류에 맞는 제시어를 랜덤으로 생성하고

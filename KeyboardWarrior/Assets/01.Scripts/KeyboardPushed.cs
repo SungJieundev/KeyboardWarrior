@@ -22,8 +22,11 @@ public class KeyboardPushed : MonoBehaviour
         if (other.CompareTag("Player")) { //충돌한 상대 오브젝트의 태그가 player라면
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
-            // feverTime.FeverKeyTirgger();
+            curKeyName = gameObject.name;
+            feverTime.FeverKeyTirgger(curKeyName);
             if (!sr.enabled) {
+
+                Debug.Log("die");
 
                 gameMain.isPlayer = false;
                 Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이

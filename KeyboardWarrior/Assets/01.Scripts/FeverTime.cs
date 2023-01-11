@@ -10,8 +10,10 @@ public class FeverTime : MonoBehaviour
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
     private int triggerCount = 0; // 피버타임을 발동하기 위한 목표 횟수
 
-    private int feverKeyBoardIndex;
+    private int feverKeyBoardIndex = 0;
     private char feverKeyBoardChar;
+
+    // public bool needFK = ;
     
     [SerializeField] private List<Color> testColor = new List<Color>(); 
 
@@ -62,13 +64,14 @@ public class FeverTime : MonoBehaviour
         compareChar.childkeyBoardls[feverKeyBoardIndex].GetComponent<SpriteRenderer>().color = color;
     }
 
-    public void FeverKeyTirgger() { //플레이어 이동할 때 마다 돌리면서 검사하면 됨
+    public void FeverKeyTirgger(string curKeyName) { //플레이어 이동할 때 마다 돌리면서 검사하면 됨
 
-        if (allChildKeyBoardList[feverKeyBoardIndex]) {
+        if (allChildKeyBoardList[feverKeyBoardIndex] != null) {
 
-            if (!allChildKeyBoardList[feverKeyBoardIndex].GetComponent<SpriteRenderer>().enabled) {
+            if (allChildKeyBoardList[feverKeyBoardIndex].name == curKeyName) {
 
                 feverCount--;
+                Debug.Log(feverCount + "피버 카운트 테슽");
                 FeverColor(Color.white);
                 if (feverCount == 0) StartCoroutine(ColorRoutine());
             }

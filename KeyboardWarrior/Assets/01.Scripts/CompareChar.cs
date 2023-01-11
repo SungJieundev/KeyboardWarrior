@@ -1,14 +1,6 @@
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using System.Buffers;
-using System.Security.Cryptography;
-using System.Linq;
-using System.ComponentModel.Design;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DG.Tweening;
 
 public class CompareChar : MonoBehaviour
 {
@@ -63,7 +55,9 @@ public class CompareChar : MonoBehaviour
                         if (parentKeyBoard.enabled || childKeyBoard.enabled)
                             KeyBoardSave(keyWordType); //옳은 키보드(비영구) 복구할 키보드 저장하기
 
-                        doTweens.LoopColor(previousKeyBoard, Color.white, Color.green, 0.5f);
+                        doTweens.LoopColor(childKeyBoard.gameObject, Color.white, Color.green, 0.5f);
+
+                        // Debug.Log(previousKeyBoard[j].name + "다트윈 테스트");
 
                         KeyBoardFalse(keyWordType); //옳은 키보드(비영구) 끄기
                     }
@@ -78,7 +72,7 @@ public class CompareChar : MonoBehaviour
 
                         KeyBoardSave(keyWordType);
 
-                        doTweens.LoopColor(previousKeyBoard, Color.white, Color.red, 0.5f);
+                        doTweens.LoopColor(childKeyBoard.gameObject, Color.white, Color.red, 0.5f);
 
                         KeyBoardFalse(keyWordType); //옳지 않은 키보드(영구) 끄기
                     }
