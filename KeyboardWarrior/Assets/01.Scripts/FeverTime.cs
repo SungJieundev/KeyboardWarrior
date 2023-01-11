@@ -50,12 +50,12 @@ public class FeverTime : MonoBehaviour
 
     private void RandomFeverKeyBoard(){
 
-        feverKeyBoardIndex = Random.Range(0, compareChar.childkeyBoardls.Count);
-        feverKeyBoardChar = compareChar.childkeyBoardls[feverKeyBoardIndex].name[0];    
+        feverKeyBoardIndex = Random.Range(0, compareChar.parentkeyBoardls.Count);
+        feverKeyBoardChar = compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0];    
     }
 
     private void StartFeverTime(){
-        
+
         StartCoroutine(Routine());
         
         // if(currentTriggerCount >= triggerCount){
