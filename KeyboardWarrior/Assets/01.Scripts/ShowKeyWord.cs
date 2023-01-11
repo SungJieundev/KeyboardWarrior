@@ -12,6 +12,8 @@ public class ShowKeyWord : MonoBehaviour
 {
     private CompareChar compareChar;
 
+    private ChangeBGColor changeBGColor;
+
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드
     private string keyWord; //키워드를 저장할 변수
 
@@ -30,10 +32,15 @@ public class ShowKeyWord : MonoBehaviour
     private void Awake() {
 
         compareChar = GetComponent<CompareChar>();
+        changeBGColor = GetComponent<ChangeBGColor>();
         keyWordTxt.text = "null";
     }
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.J)) keyWordShow(); //테스트용
+        if (Input.GetKeyDown(KeyCode.J)) {
+
+            keyWordShow(); //테스트용
+            changeBGColor.Change();
+        }
         if (Input.GetKeyDown(KeyCode.K)) compareChar.AllKeyBoardTrue(); //테스트용
     }
 
