@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FeverTime : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class FeverTime : MonoBehaviour
     private void Awake() {
         
         compareChar = GetComponent<CompareChar>();
+
+        
     }
 
     private void Update() {
@@ -24,7 +27,9 @@ public class FeverTime : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.S)){
             RandomFeverKeyBoardRoutine();
             Debug.Log($"뽑힌 피버키보드 : {feverKeyBoardChar}");
-        }
+
+            StartFeverTime();
+        }    
     }
 
     public void RandomFeverKeyBoardRoutine(){
@@ -53,13 +58,23 @@ public class FeverTime : MonoBehaviour
         feverKeyBoardChar = compareChar.keyBoard[feverKeyBoardIndex].name[0];    
     }
 
-    private void FeverKeyBoardTrigger(){
-
-        
-    }
-
     private void StartFeverTime(){
 
+        if(currentTriggerCount >= triggerCount){
 
+            Sequence seq = DOTween.Sequence();
+
+            seq.Append(keyboardPushed.sr.DOColor(Color.red, 0.1f));
+            seq.Append(keyboardPushed.sr.DOColor(Color.yellow, 0.1f));
+            seq.Append(keyboardPushed.sr.DOColor(Color.green, 0.1f));
+            seq.Append(keyboardPushed.sr.DOColor(Color.blue, 0.1f));
+            seq.Append(keyboardPushed.sr.DOColor(Color.magenta, 0.1f));
+            seq.Append(keyboardPushed.sr.DOColor(Color.white, 0.1f));
+            
+            seq.OnComplete(() => {
+
+                compareChar.AllKeyBoardTrue();
+            });
+        }
     }
 }
