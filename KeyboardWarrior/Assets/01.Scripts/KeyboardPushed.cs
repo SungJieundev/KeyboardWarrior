@@ -7,6 +7,8 @@ public class KeyboardPushed : MonoBehaviour
 {
     public SpriteRenderer sr;
 
+    public string curKeyName;
+
     private void Awake() {
         sr = GetComponent<SpriteRenderer>();
     }
@@ -15,6 +17,7 @@ public class KeyboardPushed : MonoBehaviour
         if (other.CompareTag("Player")) { //충돌한 상대 오브젝트의 태그가 player라면
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
+            curKeyName = gameObject.name;
         }
     }
 
