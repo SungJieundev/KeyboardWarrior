@@ -29,24 +29,19 @@ public class DoTweens : MonoBehaviour
 
     public void LoopColor(GameObject obj, Color currentColor, Color endColor, float time, string keyWordType){
 
-
         SpriteRenderer objsr = obj.GetComponent<SpriteRenderer>();
 
         Sequence sequence = DOTween.Sequence();
         
         for (int i = 0; i < 2; i++) {
 
-            if (!feverTime.feverTiming) {
+            sequence.Append(objsr.DOColor(endColor, time));
+            sequence.Append(objsr.DOColor(currentColor, time));
 
-                sequence.Append(objsr.DOColor(endColor, time));
-                sequence.Append(objsr.DOColor(currentColor, time));
-
-                sequence.OnComplete(() => {
-
-                    compareChar.KeyBoardFalse(keyWordType);
-                });
-            }   
         }
+        sequence.OnComplete(()=>{
+            compareChar.KeyBoardFalse(keyWordType);
+        });
     }
 
     private Vector3 originalTransform;
@@ -63,5 +58,14 @@ public class DoTweens : MonoBehaviour
 
         panel.transform.DOMove(originalTransform, 0.5f);
     }
-    
+
+    public void KillDotween(List<GameObject> objs) {    
+
+        foreach (GameObject dotKey in objs) {
+
+            dotKey.transform.DOKill();
+            
+            Debug.Log(DOTween.KillAll(dotKey) + "얘 다트윈 끝남");
+        }
+    }
 }

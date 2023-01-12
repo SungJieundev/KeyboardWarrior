@@ -285,19 +285,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ed8a10127142d4891de4523ecaa927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyWordTxt: {fileID: 191859494}
   trueKeyWordList:
-  - 12345
-  - 67890
-  - qwert
-  - yuiop
-  - asdfg
+  - ienumerator
+  - vector3
+  - vector4
+  - spriterenderer
+  - getcomponent
+  - rigidbody5d
+  - gameobject
+  - position
+  - physics
+  - quternion
+  - windows
+  - textures
+  - button
+  - exception
+  - overflow
+  - nullreference
+  - unityengine
+  - velocity
+  - contextmenu
+  - animation
+  - transition
+  - zeroformatter
+  - xrraycast
   falseKeyWordList:
-  - hjkl
-  - zxcv
-  - bnm
+  - null
+  - int
+  - ui
+  - audio
+  - public
+  - float
+  - radius
+  - var
+  - const
+  - size
+  - grid
+  - tile
+  - type
+  - text
+  - input
+  - build
+  - using
+  - atan2
+  - 8bit
+  - dir
+  - int64
+  - int128
+  - zero
   truep: 100
-  falsep: 50
+  falsep: 20
 --- !u!4 &17935842
 Transform:
   m_ObjectHideFlags: 0
@@ -365,6 +402,11 @@ MonoBehaviour:
   - {fileID: 1347459510}
   - {fileID: 690372724}
   childkeyBoardls: []
+  previousKeyBoard: []
+  colorList:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.4660377, b: 0.4660377, a: 1}
+  - {r: 1, g: 0.983193, b: 0.4666667, a: 1}
 --- !u!114 &17935844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,10 +431,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2ec47f9b8ef5243b55b0148ea4b17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allChildKeyBoardList: []
-  feverCount: 5
+  allChildKeyBoardList:
+  - {fileID: 1645931192}
+  - {fileID: 2137930324}
+  - {fileID: 356829664}
+  - {fileID: 1880169232}
+  - {fileID: 1262730123}
+  - {fileID: 83345637}
+  - {fileID: 819821111}
+  - {fileID: 708115448}
+  - {fileID: 695521892}
+  - {fileID: 1875872541}
+  - {fileID: 898785391}
+  - {fileID: 124821091}
+  - {fileID: 1372441004}
+  - {fileID: 1597307385}
+  - {fileID: 697353178}
+  - {fileID: 1001043721}
+  - {fileID: 527150023}
+  - {fileID: 495259408}
+  - {fileID: 1011479750}
+  - {fileID: 1308891761}
+  - {fileID: 1948741171}
+  - {fileID: 113300119}
+  - {fileID: 894787798}
+  - {fileID: 44647922}
+  - {fileID: 289010267}
+  - {fileID: 1531351641}
+  - {fileID: 789831261}
+  - {fileID: 1762544634}
+  - {fileID: 1945154903}
+  - {fileID: 1908109151}
+  - {fileID: 819038187}
+  - {fileID: 1223415683}
+  - {fileID: 497819607}
+  - {fileID: 1737740728}
+  - {fileID: 894269671}
+  - {fileID: 121960793}
+  - {fileID: 1246259180}
+  - {fileID: 307096740}
+  - {fileID: 634531528}
+  - {fileID: 177342535}
+  - {fileID: 1269281417}
+  - {fileID: 1990279004}
+  - {fileID: 118073544}
+  - {fileID: 1664943144}
+  - {fileID: 1966509617}
+  - {fileID: 948723799}
+  - {fileID: 837793500}
+  - {fileID: 206257886}
+  - {fileID: 745892193}
+  - {fileID: 526719150}
+  - {fileID: 575199468}
+  - {fileID: 786927211}
+  - {fileID: 1218406804}
+  - {fileID: 488361197}
+  - {fileID: 1525118640}
+  - {fileID: 1696974512}
+  - {fileID: 900850027}
+  - {fileID: 377943055}
+  - {fileID: 1216122945}
+  - {fileID: 958784354}
+  - {fileID: 1035145437}
+  - {fileID: 874865230}
+  - {fileID: 1726053884}
+  - {fileID: 85135799}
+  - {fileID: 22124947}
+  - {fileID: 1161214528}
+  - {fileID: 61494690}
+  - {fileID: 433999236}
+  - {fileID: 2075353369}
+  - {fileID: 724804160}
+  - {fileID: 1722803008}
+  - {fileID: 832085472}
+  - {fileID: 1197593958}
+  - {fileID: 1924028658}
+  - {fileID: 873933348}
+  - {fileID: 345996902}
+  maxFeverCount: 1
+  curFeverCount: 0
   feverKeyBoardIndex: 0
   needFK: 0
+  feverTiming: 0
   feverTimeColor:
   - {r: 1, g: 0.65471697, b: 0.78751814, a: 1}
   - {r: 0.84662205, g: 1, b: 0.68301886, a: 1}
@@ -400,6 +520,7 @@ MonoBehaviour:
   - {r: 0.61698115, g: 0.8739852, b: 1, a: 1}
   - {r: 0.9153948, g: 0.75849056, b: 1, a: 1}
   - {r: 0.99090755, g: 1, b: 0.5981132, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &17935846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +558,7 @@ MonoBehaviour:
   - 3
   - 2
   - 1
-  turnDelay: 2
+  turnDelay: 1.5
   isTurnEnd: 1
   isPlayer: 1
 --- !u!114 &17935848

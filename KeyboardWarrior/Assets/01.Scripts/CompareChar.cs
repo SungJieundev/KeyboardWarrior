@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -16,11 +17,12 @@ public class CompareChar : MonoBehaviour
     public List<GameObject> parentkeyBoardls = new List<GameObject>(); //이동 가능한 부모 키보드를 담아둔 리스트
     public List<GameObject> childkeyBoardls = new List<GameObject>(); //이동 가능한 자식 키보드를 담아둔 리스트
 
-
     public List<GameObject> previousKeyBoard = new List<GameObject>(); //이전의 키보드를 담아둔다.
 
     private SpriteRenderer parentKeyBoard; //키보드 중 부모의 SpriteRenderer를 받아올 변수
     private SpriteRenderer childKeyBoard; //키보드 중 자식의 SpriteRenderer를 받아올 변수
+
+    public List<Color> colorList = new List<Color>();
 
     private void Start() {
         
@@ -78,6 +80,7 @@ public class CompareChar : MonoBehaviour
         }
 
         AddScore(); //스코어 주기
+        
     }
 
     public void KeyBoardFalse(string keyWordType) { //옳은 키워드 키보드 끄기 = 끄기 반전
@@ -85,13 +88,19 @@ public class CompareChar : MonoBehaviour
         foreach (GameObject aa in previousKeyBoard) aa.GetComponent<SpriteRenderer>().enabled = false;
 
         if (keyWordType == "falseT") KeyWordClear();
+        if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
     }
 
     public void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
 
-        foreach (GameObject previousKBList in previousKeyBoard) { //복구해야할 키보드를 담아둔 리스트를 전부 반복
+        Debug.Log("시발 살려조");
 
-            previousKBList.GetComponent<SpriteRenderer>().enabled = true; //리스트 값 전부를 켜 준다.
+        foreach (GameObject previousKBList in previousKeyBoard) { //복구해야할 키보드를 담아둔 리스트를 전부 반복
+            
+            // print(previousKBList.GetComponent<SpriteRenderer>().enabled);
+            previousKBList.GetComponent<SpriteRenderer>().enabled = true; //리스트 값 전부를 켜준다.
+            // print(previousKBList.GetComponent<SpriteRenderer>().enabled);
+            // if (previousKBList.GetComponent<SpriteRenderer>().enabled) Debug.Log("켜져잇음;");
         }
 
         KeyWordClear();
@@ -105,7 +114,7 @@ public class CompareChar : MonoBehaviour
             childkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
         }
 
-        feverTime.feverTiming = false;
+        // feverTime.feverTiming = true;
     }
 
 
@@ -116,12 +125,11 @@ public class CompareChar : MonoBehaviour
             previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
             previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
 
-            if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
         }
     }
 
     public void KeyWordClear() { //제시어 칸 청소 - 
-
+        print("KeyworClear Excute");
         keyWordTxt.text = "";
         gameMain.isTurnEnd = true;
     }
@@ -134,7 +142,7 @@ public class CompareChar : MonoBehaviour
     public void DotKeyBoard(string keyWordType) {
 
         foreach(GameObject dotKey in previousKeyBoard) 
-            doTweens.LoopColor(dotKey, Color.white, Color.red, 0.5f, keyWordType);
+            doTweens.LoopColor(dotKey, colorList[0], colorList[1], 1f, keyWordType);
     }
     public void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
 

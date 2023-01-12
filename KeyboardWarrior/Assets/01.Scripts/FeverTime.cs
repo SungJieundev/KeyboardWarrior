@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FeverTime : MonoBehaviour
 {
     CompareChar compareChar;
+    DoTweens doTweens;
 
     [SerializeField] private List<GameObject> allChildKeyBoardList = new List<GameObject>(); //모든 자식 키보드가 담긴 리스트
 
-    [SerializeField] private int feverCount; //총 몇 번의 피버키를 모아야 하는지
+    [SerializeField] private int maxFeverCount; //총 몇 개의 피버키를 모아야 하는지
+    [SerializeField] private int curFeverCount; //앞으로 몇 개의 피버키를 모아야 하는지
+
 
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
     private int triggerCount = 0; // 피버타임을 발동하기 위한 목표 횟수
 
     public int feverKeyBoardIndex = 0; //정해진 피버키의 인덱스를 담을 변수
     private char feverKeyBoardChar; //정해진 피버키의 이름을 담을 변수
+    private char previousFeverKeyBoardChar;
 
     public bool needFK = false; //현재 피버키가 정해져 있는지
 
@@ -28,9 +33,14 @@ public class FeverTime : MonoBehaviour
     private void Awake() {
         
         compareChar = GetComponent<CompareChar>();
+        doTweens = GetComponent<DoTweens>();
+
+        curFeverCount = maxFeverCount;
     }
 
     public void RandomFeverKeyBoardRoutine(string keyWordType){
+
+        FeverColor(compareChar.colorList[0]);
 
         needFK = false;
 
@@ -40,14 +50,16 @@ public class FeverTime : MonoBehaviour
 
             //뽑은 피버키 상태가 없거나 제시어에 포함되거나 이전 피버키와 동일하다면 다시 뽑는다
 
-            while(compareChar.keyWord.Contains(feverKeyBoardChar) && 
-                GameObject.Find(feverKeyBoardChar.ToString()).GetComponent<SpriteRenderer>().enabled == true &&
-                feverKeyBoardChar ==  compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0]){ //- 얘가 문제임, 안 멈춰서 터졌던 거
-
-                RandomFeverKeyBoard();
+            while(compareChar.keyWord.Contains(feverKeyBoardChar) || 
+                GameObject.Find(feverKeyBoardChar.ToString()).GetComponent<SpriteRenderer>().enabled == false) 
+            {
+                if (previousFeverKeyBoardChar == compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0])
+                    RandomFeverKeyBoard();
             }
 
-            FeverColor(Color.yellow); //뽑았다면 색을 바꾼다.
+            previousFeverKeyBoardChar = feverKeyBoardChar;
+
+            FeverColor(compareChar.colorList[2]); //뽑았다면 색을 바꾼다.
             Debug.Log(feverKeyBoardChar);
         }
 
@@ -59,6 +71,8 @@ public class FeverTime : MonoBehaviour
 
         feverKeyBoardIndex = Random.Range(0, compareChar.parentkeyBoardls.Count);
         feverKeyBoardChar = compareChar.parentkeyBoardls[feverKeyBoardIndex].name[0];  
+
+        previousFeverKeyBoardChar = feverKeyBoardChar;
     }
 
     public void FeverColor(Color color){ //피버키 색 바꾸는 메서드
@@ -71,30 +85,33 @@ public class FeverTime : MonoBehaviour
             if (feverKeyBoardChar.ToString() == curKeyName && !triggerFeverKey) {
 
                 triggerFeverKey = true;
-                feverCount--;
-                FeverColor(Color.white);
+                curFeverCount--;
+                FeverColor(compareChar.colorList[0]);
 
-                if (feverCount == 0) StartCoroutine(ColorRoutine());
+                if (curFeverCount == 0) StartCoroutine(ColorRoutine());
             }           
     }
 
     IEnumerator ColorRoutine(){
 
         Debug.Log("피버타임 실행");
-        feverTiming = true;
+
+        doTweens.KillDotween(compareChar.previousKeyBoard);
 
         compareChar.AllKeyBoardTrue(); //보상
 
 
         for (int j = 0; j < feverTimeColor.Count; j++) { //팔레트 수 만큼
+            Debug.Log(j);
 
             for (int i = 0; i < allChildKeyBoardList.Count; i++) { //키보드 수 만큼
 
                 allChildKeyBoardList[i].GetComponent<SpriteRenderer>().color = feverTimeColor[j];
+                Debug.Log(allChildKeyBoardList[i].GetComponent<SpriteRenderer>().color + "t색");
             }
             yield return new WaitForSeconds(0.1f); //몇 초 있다가 색 바뀌게 할건지
         }
 
-        feverCount = 5;
+        curFeverCount = maxFeverCount;
     }
 }
