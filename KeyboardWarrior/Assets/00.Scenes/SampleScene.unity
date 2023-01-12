@@ -259,12 +259,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 17935842}
+  - component: {fileID: 17935847}
   - component: {fileID: 17935841}
   - component: {fileID: 17935843}
-  - component: {fileID: 17935844}
   - component: {fileID: 17935845}
+  - component: {fileID: 17935844}
   - component: {fileID: 17935846}
-  - component: {fileID: 17935847}
+  - component: {fileID: 17935848}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -324,7 +325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67ecb686d19fc14b881b87b6e623c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyWordTxt: {fileID: 191859494}
   keyWord: 
   parentkeyBoardls:
   - {fileID: 826802726}
@@ -365,8 +365,6 @@ MonoBehaviour:
   - {fileID: 1347459510}
   - {fileID: 690372724}
   childkeyBoardls: []
-  previousKeyBoard: []
-  duration: 1.5
 --- !u!114 &17935844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf8333f8f5a4654396c08e9bb1f1bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dotCount: 2
 --- !u!114 &17935845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,13 +393,13 @@ MonoBehaviour:
   feverCount: 5
   feverKeyBoardIndex: 0
   needFK: 0
-  testColor:
-  - {r: 1, g: 0.48490566, b: 0.48490566, a: 1}
-  - {r: 1, g: 0.96697, b: 0.53207546, a: 1}
-  - {r: 0.51320755, g: 1, b: 0.570358, a: 1}
-  - {r: 0.53207546, g: 0.78897506, b: 1, a: 1}
-  - {r: 0.7268368, g: 0.44716978, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  feverTimeColor:
+  - {r: 1, g: 0.65471697, b: 0.78751814, a: 1}
+  - {r: 0.84662205, g: 1, b: 0.68301886, a: 1}
+  - {r: 0.5509434, g: 1, b: 0.8333818, a: 1}
+  - {r: 0.61698115, g: 0.8739852, b: 1, a: 1}
+  - {r: 0.9153948, g: 0.75849056, b: 1, a: 1}
+  - {r: 0.99090755, g: 1, b: 0.5981132, a: 1}
 --- !u!114 &17935846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,16 +431,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7aa7d981316fec49b226f900ee37a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showKeyWord: {fileID: 17935841}
   keyWordTxt: {fileID: 191859494}
   startMsg:
   - Start
   - 3
   - 2
   - 1
-  gameDelay: 2
-  isDone: 1
+  turnDelay: 2
+  isTurnEnd: 1
   isPlayer: 1
+--- !u!114 &17935848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17935840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539ca0d457a6a342a4322c6492751d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTxt: {fileID: 1649527997}
+  maxScoreTxt: {fileID: 0}
+  curScore: 0
+  addScore: 10
 --- !u!1 &22124947
 GameObject:
   m_ObjectHideFlags: 0
@@ -12454,7 +12466,7 @@ GameObject:
   - component: {fileID: 1649527998}
   - component: {fileID: 1649527997}
   m_Layer: 5
-  m_Name: Point
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

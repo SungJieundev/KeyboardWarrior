@@ -5,19 +5,24 @@ using TMPro;
 
 public class GameMain : MonoBehaviour
 {
-    [SerializeField] ShowKeyWord showKeyWord;
+    ShowKeyWord showKeyWord;
 
-    [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드
+    public TextMeshProUGUI keyWordTxt; //키워드
 
     [SerializeField] private string[] startMsg;
 
-    [SerializeField] private float gameDelay;
+    [SerializeField] private float turnDelay;
 
-    public bool isDone = true;
+    bool endStartMsg = false; //시작 메세지가 실행됐는지 확인하는 변수
 
-    public bool isPlayer = true;
+    public bool isTurnEnd = true; //한 턴이 끝났는지 확인하는 변수
 
-    bool test = false;
+    public bool isPlayer = true; //플레이어가 살아있는지 확인하는 변수
+
+    private void Awake() {
+        
+        showKeyWord = GetComponent<ShowKeyWord>();
+    }
 
     private void Start() { //시작!
         
@@ -30,16 +35,13 @@ public class GameMain : MonoBehaviour
     
         while (true) {
 
-            if (test) {
+            if (endStartMsg) {
 
                 showKeyWord.keyWordShow(); //키워드를 제시해준다
-                isDone = false;
-                //옳, 옳 않을 특정 확률로 구해 그 종류에 맞는 제시어를 랜덤으로 생성하고
-                //옳, 옳 않 타입을 Compare에 보낸다
-                //키워드가 작성되는 다트윈을 실행한다.
+                isTurnEnd = false;
             }
-            yield return new WaitUntil(() => isDone && isPlayer);
-            yield return new WaitForSeconds(3);
+            yield return new WaitUntil(() => isTurnEnd && isPlayer);
+            yield return new WaitForSeconds(turnDelay);
         }
     }
 
@@ -53,6 +55,6 @@ public class GameMain : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
 
         }
-        test = true;
+        endStartMsg = true;
     }
 }

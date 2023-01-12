@@ -63,7 +63,7 @@ public class ShowKeyWord : MonoBehaviour
         sequence.OnComplete(() => {
 
             compareChar.Compare(keyWordType);
-            feverTime.RandomFeverKeyBoardRoutine();
+            feverTime.RandomFeverKeyBoardRoutine(keyWordType);
         });
     }
 }

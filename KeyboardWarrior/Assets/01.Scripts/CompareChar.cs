@@ -4,11 +4,12 @@ using TMPro;
 
 public class CompareChar : MonoBehaviour
 {
-    DoTweens doTweens;
     GameMain gameMain;
+    FeverTime feverTime;
+    DoTweens doTweens;
     UIManager uIManager;
 
-    [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
+    private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
     public string keyWord; //키워드 받아오는 변수
 
@@ -21,8 +22,6 @@ public class CompareChar : MonoBehaviour
     private SpriteRenderer parentKeyBoard; //키보드 중 부모의 SpriteRenderer를 받아올 변수
     private SpriteRenderer childKeyBoard; //키보드 중 자식의 SpriteRenderer를 받아올 변수
 
-    [SerializeField] private float duration; //다트윈 지속시간
-
     private void Start() {
         
         //자식 키보드 리스트를 채워주는 코드
@@ -32,14 +31,17 @@ public class CompareChar : MonoBehaviour
 
     private void Awake() {
 
-        doTweens = GetComponent<DoTweens>();
         gameMain = GetComponent<GameMain>();
+        feverTime = GetComponent<FeverTime>();
+        doTweens = GetComponent<DoTweens>();
         uIManager = GetComponent<UIManager>();
+
+        keyWordTxt = gameMain.keyWordTxt;
     }
 
     public void Compare(string keyWordType) {
         
-        keyWord = keyWordTxt.text; //현재 키워드 받아오기
+        keyWord = gameMain.keyWordTxt.text; //현재 키워드 받아오기
 
         PreviousSaveListClear(); //복구할 키보드 담아둔 리스트 클리어
 
@@ -56,12 +58,6 @@ public class CompareChar : MonoBehaviour
 
                         if (parentKeyBoard.enabled || childKeyBoard.enabled)
                             KeyBoardSave(keyWordType); //옳은 키보드(비영구) 복구할 키보드 저장하기
-
-                        doTweens.LoopColor(childKeyBoard.gameObject, Color.white, Color.green, 0.5f);
-
-                        // Debug.Log(previousKeyBoard[j].name + "다트윈 테스트");
-
-                        KeyBoardFalse(keyWordType); //옳은 키보드(비영구) 끄기
                     }
                 }
 
@@ -73,21 +69,20 @@ public class CompareChar : MonoBehaviour
                         childKeyBoard = childkeyBoardls[j].GetComponent<SpriteRenderer>(); //현재 자식 키보드 SpriteRenderer 받아오기
 
                         KeyBoardSave(keyWordType);
-
-                        doTweens.LoopColor(childKeyBoard.gameObject, Color.white, Color.red, 0.5f);
-
-                        KeyBoardFalse(keyWordType); //옳지 않은 키보드(영구) 끄기
                     }
                 }
                 else { Debug.LogError("코딩이 옳지도 옳지 않지도 않음 == 오류");} //이거 뜨면 showkeyword의 확률 문제
             }
+
+            DotKeyBoard(keyWordType); //다트윈 실행
         }
+
+        AddScore(); //스코어 주기
     }
 
     public void KeyBoardFalse(string keyWordType) { //옳은 키워드 키보드 끄기 = 끄기 반전
 
-        parentKeyBoard.enabled = false; //키보드의 부모의 SpriteRenderer를 꺼주고
-        childKeyBoard.enabled = false; //자식의 SpriteRenderer도 꺼준다.
+        foreach (GameObject aa in previousKeyBoard) aa.GetComponent<SpriteRenderer>().enabled = false;
 
         if (keyWordType == "falseT") KeyWordClear();
     }
@@ -104,36 +99,45 @@ public class CompareChar : MonoBehaviour
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상 (테스트 성공)
 
-        //피버타임 문구 띄우기
         for (int i = 0; i < parentkeyBoardls.Count; i++) {
 
             parentkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
             childkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
         }
+
+        feverTime.feverTiming = false;
     }
 
-    public void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
-
-        previousKeyBoard.Clear();
-    }
 
     public void KeyBoardSave(string keyWordType) { //옳은 코딩(비영구)라면 복구를 위해 삭제한 키보드를 담아둠 - 수정해야함.
 
-        previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
-        previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
+        if(previousKeyBoard.Find(x => x == parentKeyBoard.gameObject) == null) { //겹치는 키는 넣지 않는다.
 
-        if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
+            previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
+            previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
+
+            if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
+        }
     }
 
     public void KeyWordClear() { //제시어 칸 청소 - 
 
         keyWordTxt.text = "";
-        gameMain.isDone = true;
-        AddScore();
+        gameMain.isTurnEnd = true;
     }
 
     public void AddScore() {
 
         uIManager.curScore += uIManager.addScore;
+    }
+
+    public void DotKeyBoard(string keyWordType) {
+
+        foreach(GameObject dotKey in previousKeyBoard) 
+            doTweens.LoopColor(dotKey, Color.white, Color.red, 0.5f, keyWordType);
+    }
+    public void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
+
+        previousKeyBoard.Clear();
     }
 }
