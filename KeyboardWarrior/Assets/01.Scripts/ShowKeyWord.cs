@@ -70,6 +70,7 @@ public class ShowKeyWord : MonoBehaviour
 
             compareChar.Compare(keyWordType);
             feverTime.RandomFeverKeyBoardRoutine(keyWordType);
+            compareChar.AddScore();
         });
     }
 }

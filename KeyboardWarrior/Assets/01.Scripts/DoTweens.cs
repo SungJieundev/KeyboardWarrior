@@ -11,6 +11,8 @@ public class DoTweens : MonoBehaviour
     CompareChar compareChar;
     FeverTime feverTime;
 
+    public GameObject panel;
+
     private void Awake() {
 
         compareChar = GetComponent<CompareChar>();
@@ -33,7 +35,7 @@ public class DoTweens : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
         
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 4; i++) {
 
             sequence.Append(objsr.DOColor(endColor, time));
             sequence.Append(objsr.DOColor(currentColor, time));
@@ -47,6 +49,7 @@ public class DoTweens : MonoBehaviour
     private Vector3 originalTransform;
 
     public void PanelDown(GameObject panel){
+
 
         originalTransform = panel.transform.position;
 
@@ -63,9 +66,7 @@ public class DoTweens : MonoBehaviour
 
         foreach (GameObject dotKey in objs) {
 
-            dotKey.transform.DOKill();
-            
-            Debug.Log(DOTween.KillAll(dotKey) + "얘 다트윈 끝남");
+            dotKey.transform.DOKill();            
         }
     }
 }

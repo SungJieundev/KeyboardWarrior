@@ -5,16 +5,22 @@ using UnityEngine;
 
 public class KeyboardPushed : MonoBehaviour
 {
+    CompareChar compareChar;
     FeverTime feverTime;
     GameMain gameMain;
+    DoTweens doTweens;
+
     public SpriteRenderer sr;
 
     public string curKeyName;
 
     private void Awake() {
 
+        compareChar = FindObjectOfType<CompareChar>();
         feverTime = FindObjectOfType<FeverTime>();
         gameMain = FindObjectOfType<GameMain>();
+        doTweens = FindObjectOfType<DoTweens>();
+
         sr = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D other) { //tirgger 충돌한다면
@@ -28,8 +34,9 @@ public class KeyboardPushed : MonoBehaviour
 
             if (!sr.enabled) {
 
-                Debug.Log("die");
+                Debug.LogError("Player Die");
 
+                doTweens.PanelDown(doTweens.panel);
                 gameMain.isPlayer = false;
                 Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이
             }

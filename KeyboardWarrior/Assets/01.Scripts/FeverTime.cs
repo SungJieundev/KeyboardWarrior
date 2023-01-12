@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class FeverTime : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class FeverTime : MonoBehaviour
 
     [SerializeField] private List<GameObject> allChildKeyBoardList = new List<GameObject>(); //모든 자식 키보드가 담긴 리스트
 
-    [SerializeField] private int maxFeverCount; //총 몇 개의 피버키를 모아야 하는지
     [SerializeField] private int curFeverCount; //앞으로 몇 개의 피버키를 모아야 하는지
+
+    [SerializeField] private List<Image> feverCheakList = new List<Image>();
+
+    [SerializeField] private Color defultColor;
 
 
     private int currentTriggerCount = 0; // 현재 피버키보드 밟은 횟수
@@ -35,7 +39,9 @@ public class FeverTime : MonoBehaviour
         compareChar = GetComponent<CompareChar>();
         doTweens = GetComponent<DoTweens>();
 
-        curFeverCount = maxFeverCount;
+        curFeverCount = feverCheakList.Count;
+
+        foreach (Image aa in feverCheakList) aa.color = defultColor;
     }
 
     public void RandomFeverKeyBoardRoutine(string keyWordType){
@@ -60,7 +66,6 @@ public class FeverTime : MonoBehaviour
             previousFeverKeyBoardChar = feverKeyBoardChar;
 
             FeverColor(compareChar.colorList[2]); //뽑았다면 색을 바꾼다.
-            Debug.Log(feverKeyBoardChar);
         }
 
         needFK = true;
@@ -85,7 +90,7 @@ public class FeverTime : MonoBehaviour
             if (feverKeyBoardChar.ToString() == curKeyName && !triggerFeverKey) {
 
                 triggerFeverKey = true;
-                curFeverCount--;
+                FeverCheak();
                 FeverColor(compareChar.colorList[0]);
 
                 if (curFeverCount == 0) StartCoroutine(ColorRoutine());
@@ -94,24 +99,28 @@ public class FeverTime : MonoBehaviour
 
     IEnumerator ColorRoutine(){
 
-        Debug.Log("피버타임 실행");
-
         doTweens.KillDotween(compareChar.previousKeyBoard);
 
         compareChar.AllKeyBoardTrue(); //보상
 
 
         for (int j = 0; j < feverTimeColor.Count; j++) { //팔레트 수 만큼
-            Debug.Log(j);
 
             for (int i = 0; i < allChildKeyBoardList.Count; i++) { //키보드 수 만큼
 
                 allChildKeyBoardList[i].GetComponent<SpriteRenderer>().color = feverTimeColor[j];
-                Debug.Log(allChildKeyBoardList[i].GetComponent<SpriteRenderer>().color + "t색");
             }
             yield return new WaitForSeconds(0.1f); //몇 초 있다가 색 바뀌게 할건지
         }
 
-        curFeverCount = maxFeverCount;
+        curFeverCount = feverCheakList.Count;
+        foreach (Image aa in feverCheakList) aa.color = defultColor;
+    }
+
+    private void FeverCheak() {
+
+        curFeverCount--;
+
+        feverCheakList[curFeverCount].color = Color.white;
     }
 }

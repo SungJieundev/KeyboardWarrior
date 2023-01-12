@@ -78,32 +78,29 @@ public class CompareChar : MonoBehaviour
 
             DotKeyBoard(keyWordType); //다트윈 실행
         }
-
-        AddScore(); //스코어 주기
-        
     }
 
     public void KeyBoardFalse(string keyWordType) { //옳은 키워드 키보드 끄기 = 끄기 반전
 
         foreach (GameObject aa in previousKeyBoard) aa.GetComponent<SpriteRenderer>().enabled = false;
 
-        if (keyWordType == "falseT") KeyWordClear();
+        if (keyWordType == "falseT") {
+            KeyWordClear();
+            // AddScore(); //스코어 주기
+        }
+
         if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
     }
 
     public void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
 
-        Debug.Log("시발 살려조");
-
         foreach (GameObject previousKBList in previousKeyBoard) { //복구해야할 키보드를 담아둔 리스트를 전부 반복
             
-            // print(previousKBList.GetComponent<SpriteRenderer>().enabled);
             previousKBList.GetComponent<SpriteRenderer>().enabled = true; //리스트 값 전부를 켜준다.
-            // print(previousKBList.GetComponent<SpriteRenderer>().enabled);
-            // if (previousKBList.GetComponent<SpriteRenderer>().enabled) Debug.Log("켜져잇음;");
         }
 
         KeyWordClear();
+        // AddScore(); //스코어 주기
     }
     
     public void AllKeyBoardTrue() { //모든 키보드 복구 = 피버타임 보상 (테스트 성공)
@@ -113,8 +110,6 @@ public class CompareChar : MonoBehaviour
             parentkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
             childkeyBoardls[i].GetComponent<SpriteRenderer>().enabled = true;
         }
-
-        // feverTime.feverTiming = true;
     }
 
 
@@ -124,12 +119,11 @@ public class CompareChar : MonoBehaviour
 
             previousKeyBoard.Add(parentKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (부모)
             previousKeyBoard.Add(childKeyBoard.gameObject); //리스트에 이전의 키보드를 담아준다. (자식);
-
         }
     }
 
     public void KeyWordClear() { //제시어 칸 청소 - 
-        print("KeyworClear Excute");
+
         keyWordTxt.text = "";
         gameMain.isTurnEnd = true;
     }
@@ -142,7 +136,7 @@ public class CompareChar : MonoBehaviour
     public void DotKeyBoard(string keyWordType) {
 
         foreach(GameObject dotKey in previousKeyBoard) 
-            doTweens.LoopColor(dotKey, colorList[0], colorList[1], 1f, keyWordType);
+            doTweens.LoopColor(dotKey, colorList[0], colorList[1], 0.3f, keyWordType);
     }
     public void PreviousSaveListClear() { //이전의 키보드를 저장해둔 리스트 초기화
 
