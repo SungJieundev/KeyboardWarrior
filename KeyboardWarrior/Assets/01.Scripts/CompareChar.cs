@@ -6,6 +6,7 @@ public class CompareChar : MonoBehaviour
 {
     DoTweens doTweens;
     GameMain gameMain;
+    UIManager uIManager;
 
     [SerializeField] private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
@@ -33,6 +34,7 @@ public class CompareChar : MonoBehaviour
 
         doTweens = GetComponent<DoTweens>();
         gameMain = GetComponent<GameMain>();
+        uIManager = GetComponent<UIManager>();
     }
 
     public void Compare(string keyWordType) {
@@ -127,5 +129,11 @@ public class CompareChar : MonoBehaviour
 
         keyWordTxt.text = "";
         gameMain.isDone = true;
+        AddScore();
+    }
+
+    public void AddScore() {
+
+        uIManager.curScore += uIManager.addScore;
     }
 }

@@ -23,7 +23,7 @@ public class KeyboardPushed : MonoBehaviour
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
             curKeyName = gameObject.name;
-            if (feverTime.needFK) feverTime.FeverKeyTirgger(curKeyName);
+            // if (feverTime.needFK) feverTime.FeverKeyTirgger(curKeyName);
 
             if (!sr.enabled) {
 

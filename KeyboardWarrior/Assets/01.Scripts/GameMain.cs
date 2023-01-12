@@ -39,7 +39,7 @@ public class GameMain : MonoBehaviour
                 //키워드가 작성되는 다트윈을 실행한다.
             }
             yield return new WaitUntil(() => isDone && isPlayer);
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(3);
         }
     }
 
