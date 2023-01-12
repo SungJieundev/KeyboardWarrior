@@ -23,7 +23,8 @@ public class KeyboardPushed : MonoBehaviour
         
             transform.Find("c").gameObject.SetActive(false); //자식을 꺼준다 = 눌린 이미지보임
             curKeyName = gameObject.name;
-            // if (feverTime.needFK) feverTime.FeverKeyTirgger(curKeyName);
+
+            if (feverTime.needFK) feverTime.FeverKeyTirgger(curKeyName);
 
             if (!sr.enabled) {
 
@@ -39,6 +40,4 @@ public class KeyboardPushed : MonoBehaviour
     
         transform.Find("c").gameObject.SetActive(true); //자식을 켜준다
     }
-
-    //이동 못 하는 곳에 비빌 때 현재 위치 꺼지는 거 고쳐야함
 }
