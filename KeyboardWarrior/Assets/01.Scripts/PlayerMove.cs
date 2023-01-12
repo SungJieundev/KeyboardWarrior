@@ -10,6 +10,15 @@ public class PlayerMove : MonoBehaviour
     private Vector2 targetPosition;
     private Vector2 originPosition;
 
+    private AudioSource moveSoundplayer;
+    private AudioSource wallSoundPlayer;
+
+    private void Awake() {
+
+        moveSoundplayer = GetComponent<AudioSource>();
+        wallSoundPlayer = GameObject.Find("WallSoundPlayer").GetComponent<AudioSource>();
+    }
+
 
     private void Update() {
         
@@ -66,10 +75,12 @@ public class PlayerMove : MonoBehaviour
 
             //gameObject.transform.Translate(targetPosition);
         }
+        AudioManager.Instance.PlayAudio("PlayerMove", moveSoundplayer);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         
+        AudioManager.Instance.PlayAudio("WallSound", wallSoundPlayer);
         gameObject.transform.position = originPosition;
     }
 

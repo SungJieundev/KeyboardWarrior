@@ -10,6 +10,8 @@ public class CompareChar : MonoBehaviour
     DoTweens doTweens;
     UIManager uIManager;
 
+    private AudioSource addScorePlayer;
+
     private TextMeshProUGUI keyWordTxt; //키워드가 들어있는 TMP
 
     public string keyWord; //키워드 받아오는 변수
@@ -33,6 +35,7 @@ public class CompareChar : MonoBehaviour
 
     private void Awake() {
 
+        addScorePlayer = GameObject.Find("AddScorePlayer").GetComponent<AudioSource>();
         gameMain = GetComponent<GameMain>();
         feverTime = GetComponent<FeverTime>();
         doTweens = GetComponent<DoTweens>();
@@ -130,6 +133,7 @@ public class CompareChar : MonoBehaviour
 
     public void AddScore() {
 
+        AudioManager.Instance.PlayAudio("PlusScore", addScorePlayer);
         uIManager.curScore += uIManager.addScore;
     }
 

@@ -14,6 +14,9 @@ public class KeyboardPushed : MonoBehaviour
 
     public string curKeyName;
 
+    private AudioSource gameOverplayer;
+    private AudioSource playerDropKeyPlayer;
+
     private void Awake() {
 
         compareChar = FindObjectOfType<CompareChar>();
@@ -22,6 +25,10 @@ public class KeyboardPushed : MonoBehaviour
         doTweens = FindObjectOfType<DoTweens>();
 
         sr = GetComponent<SpriteRenderer>();
+
+        gameOverplayer = GameObject.Find("GameOverPlayer").GetComponent<AudioSource>();
+        playerDropKeyPlayer = GameObject.Find("PlayerDropKeyPlayer").GetComponent<AudioSource>();
+
     }
     private void OnTriggerEnter2D(Collider2D other) { //tirgger 충돌한다면
 
@@ -36,9 +43,12 @@ public class KeyboardPushed : MonoBehaviour
 
                 Debug.LogError("Player Die");
 
+                AudioManager.Instance.PlayAudio("PlayerDropKey", playerDropKeyPlayer);
+
                 doTweens.PanelDown(doTweens.panel);
                 gameMain.isPlayer = false;
                 Destroy(other.gameObject); //검정인 곳 밟는다면 디스트로이
+                AudioManager.Instance.PlayAudio("GameOver", gameOverplayer);
             }
         }
     }

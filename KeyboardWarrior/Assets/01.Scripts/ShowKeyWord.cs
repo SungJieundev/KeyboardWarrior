@@ -18,6 +18,8 @@ public class ShowKeyWord : MonoBehaviour
     private TextMeshProUGUI keyWordTxt; //키워드
     private string keyWord; //키워드를 저장할 변수
 
+    private AudioSource typingplayer;
+
     [SerializeField] private List<string> trueKeyWordList = new List<string>(); //옳은 - 비영구
     [SerializeField] private List<string> falseKeyWordList = new List<string>(); //옳지 않은 - 영구
 
@@ -37,6 +39,7 @@ public class ShowKeyWord : MonoBehaviour
         gameMain = GetComponent<GameMain>();
         feverTime = GetComponent<FeverTime>();
         changeBGColor = GetComponent<ChangeBGColor>();
+        typingplayer = GameObject.Find("TypingPlayer").GetComponent<AudioSource>();
     
         keyWordTxt = gameMain.keyWordTxt;
         keyWord = keyWordTxt.text;
@@ -64,6 +67,7 @@ public class ShowKeyWord : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
 
+        AudioManager.Instance.PlayAudio("KeyBoardTyping", typingplayer);
         sequence.Append(keyWordTxt.DOText(keyWord, typingDuration));
 
         sequence.OnComplete(() => {

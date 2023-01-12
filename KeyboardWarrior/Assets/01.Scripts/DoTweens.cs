@@ -8,6 +8,8 @@ using TMPro;
 
 public class DoTweens : MonoBehaviour
 {
+    public AudioSource beepSoundplayer;
+
     CompareChar compareChar;
     FeverTime feverTime;
 
@@ -15,6 +17,7 @@ public class DoTweens : MonoBehaviour
 
     private void Awake() {
 
+        beepSoundplayer = GameObject.Find("BeepPlayer").GetComponent<AudioSource>();
         compareChar = GetComponent<CompareChar>();
         feverTime = GetComponent<FeverTime>();
     }
@@ -39,6 +42,7 @@ public class DoTweens : MonoBehaviour
 
             sequence.Append(objsr.DOColor(endColor, time));
             sequence.Append(objsr.DOColor(currentColor, time));
+            AudioManager.Instance.PlayAudio("Beep", beepSoundplayer);
 
         }
         sequence.OnComplete(()=>{
@@ -50,11 +54,9 @@ public class DoTweens : MonoBehaviour
 
     public void PanelDown(GameObject panel){
 
-
         originalTransform = panel.transform.position;
 
         panel.transform.DOLocalMove(new Vector3(0, 26f, 0), 1f);
-
     }
 
     public void PanelUp(GameObject panel){
