@@ -92,7 +92,7 @@ public class CompareChar : MonoBehaviour
             // AddScore(); //스코어 주기
         }
 
-        if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 3f); //비영구 키워드의 키보드 복구 메서드
+        if (keyWordType == "trueT") Invoke("TrueKeyBoardTrue", 1.5f); //비영구 키워드의 키보드 복구 메서드
     }
 
     public void TrueKeyBoardTrue() { //옳은 키워드 키보드 복구 = 턴 지나면 살리기
